@@ -9,8 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sanity/orderable-document-list": "^1.2.1",
+    "@sanity/vision": "^3.43.0",
+    "framer-motion": "^11.2.6",
+    "hamburger-react": "^2.5.1",
+    "next": "14.2.3",
+    "next-intl": "^3.14.1",
+    "next-sanity": "^9.3.7",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.3"
+    "swiper": "^11.1.4"
   }
 }
