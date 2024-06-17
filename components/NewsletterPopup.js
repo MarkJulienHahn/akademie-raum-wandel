@@ -8,7 +8,8 @@ const inVisible = { opacity: 0, pointerEvents: "none" };
 
 const NewsletterPopup = ({ content }) => {
   // Retrieve the initial state from session storage or default to true
-  const initialShowState = sessionStorage.getItem("newsletterShow") === "false" ? false : true;
+  const initialShowState = typeof window !== "undefined" && sessionStorage.getItem("newsletterShow") === "false" ? false : true;
+  
   const [show, setShow] = useState(initialShowState);
 
   // Synchronize the state with session storage

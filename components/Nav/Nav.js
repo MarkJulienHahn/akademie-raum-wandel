@@ -27,15 +27,15 @@ const menu = [
 const Nav = ({ locale }) => {
   const pathname = usePathname();
   const neutralPath = removeFirstThreeCharacters(pathname);
-  const [opacity, setOpacity] = useState(1);
+  const [top, setTop] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY || window.pageYOffset;
       if (scrollY > 200) {
-        setOpacity(0);
+        setTop(false);
       } else {
-        setOpacity(1 - scrollY / 200);
+        setTop(true);
       }
     };
 
@@ -51,13 +51,41 @@ const Nav = ({ locale }) => {
   }, [pathname]);
 
   return (
-    <div className="navWrapper">
+    <div
+      className="navWrapper"
+      style={{
+        height: top ? "90px" : "60px",
+        transition: "all 0.5s",
+        fontSize: top ? "var(--fontSize-S)" : "var(--fontSize-XS)",
+        letterSpacing: top
+          ? "var(--letterSpacing-S)"
+          : "var(--letterSpacing-S)",
+      }}
+    >
       <Link href="/" scroll={false}>
         <div className="navLogo">
-          <Image src={"/images/arw-logo-short.svg"} width={60} height={40} />
+          <Image
+            src={"/images/arw-logo-short.svg"}
+            width={60}
+            height={50}
+            style={{
+              transform: top
+                ? "scale(1.5) translateX(13px) translateY(10px)"
+                : "scale(1)",
+            }}
+          />
         </div>
-        <div className="navLogo" style={{ opacity: opacity, transition: "opacity 0.5s" }}>
-          <Image src={"/images/arw-logo-full.svg"} width={60} height={40} />
+        <div className="navLogo" style={{ opacity: top ? 1 : 0 }}>
+          <Image
+            src={"/images/arw-logo-full.svg"}
+            width={60}
+            height={50}
+            style={{
+              transform: top
+                ? "scale(1.5) translateX(13px) translateY(10px)"
+                : "scale(1)",
+            }}
+          />
         </div>
       </Link>
 

@@ -133,6 +133,7 @@ ul {
   background: var(--white);
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: var(--space-S);
   font-family: "MJH-Book";
   filter: drop-shadow(0 -13.5px 9px black);
@@ -144,6 +145,11 @@ ul {
 .navLogo {
   position: absolute;
   top: 6px;
+  transition: opacity 0.5s ease;
+}
+
+.navLogo img {
+  transition: transform 0.5s ease;
 }
 
 .navMenu a {
@@ -507,11 +513,7 @@ ul {
 }
 
 .kachelWrapper h1 {
-  font-family: "Siggnal-Light";
   margin: var(--space-L) 0 0;
-  font-size: var(--fontSize-XL);
-  line-height: var(--lineHeight-XL);
-  letter-spacing: var(--letterSpacing-XL);
   hyphens: auto;
 }
 
@@ -656,7 +658,7 @@ ul {
   width: 100%;
   position: sticky;
   height: 100px;
-  top: 20px;
+  top: 27px;
   padding-top: 10px;
   font-size: var(--fontSize-XS);
   letter-spacing: var(--letterSpacing-XS);
@@ -1076,7 +1078,7 @@ ul {
 
 .singleWeitereHead a {
   font-family: "MJH-Bold";
-  transition: opacity 0.2s ease
+  transition: opacity 0.2s ease;
 }
 
 .singleWeitereHead a:hover {

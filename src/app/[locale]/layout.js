@@ -14,7 +14,7 @@ export default function LocaleLayout({ children, params: { locale } }) {
     <html lang={locale}>
       <body>
         <Nav locale={locale}/>
-        {/* <NewsletterContent /> */}
+        <NewsletterContent />
         <PageTransitionEffect>
           {children}
           <Footer />
