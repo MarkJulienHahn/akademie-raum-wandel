@@ -45,7 +45,7 @@ export async function getAkademie() {
 
 export async function getAngebote() {
   return client.fetch(
-    groq`*[_type == "angebote"]|order(orderRank){
+    groq`*[_type == "angebote"]| order(termine[0].date asc){
       ...,
       "personen": personen[]->{name, slug, ..., "portrait": portrait{..., "url": asset->{url}}},
       termine[] {

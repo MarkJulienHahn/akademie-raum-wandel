@@ -45,32 +45,22 @@ const AngebotRow = ({ angebot }) => {
     !inTheFuture && (
       <div className="angebotRow vergangen">
         <div className="katRow">
-          <p>
-            {" "}
-            {angebot?.kategorie.map((kategorie, i, arr) => (
-              <span key={i}>
-                {kategorie}
-                {i < arr.length - 1 ? <br /> : ""}
-              </span>
-            ))}
-          </p>
+          <p>{angebot?.kategorie}</p>
         </div>
         <div className="discRow">
           <h1 className="rowHeadline">{angebot?.title}</h1>
           <PortableText value={angebot.descriptionShort} />
         </div>
         <div className="datesRow">
-          <div className="dateRow dates">
-            {angebot?.aufzeichnung
-              ? "Aufzeichnung verfügbar"
-              : "Aktuell ist leider keine Aufzeichnung verfügbar"}
-          </div>{" "}
+          {angebot?.aufzeichnung && (
+            <div className="dateRow dates">Aufzeichnung verfügbar</div>
+          )}
           <div className="persRow">
             {angebot?.personen.map((person, i) => (
               <div key={i}>{person.name}</div>
             ))}
           </div>
-          <div className="disclaimer disclaimerRow">
+          {/* <div className="disclaimer disclaimerRow">
             <p>
               <span className="termine">
                 {numbersDE[angebot?.termine.length]}
@@ -79,14 +69,23 @@ const AngebotRow = ({ angebot }) => {
               {angebot?.aufzeichnung &&
                 " mit danach versendeter Aufzeichnung für zeitliche Flexibilität."}
             </p>
-          </div>
+          </div> */}
         </div>
 
         <div className="buttonRow">
           {angebot?.aufzeichnung ? (
-            <Button value="Jetzt laden" light={true} border={true} />
+            <Button
+              value="Jetzt laden"
+              light={true}
+              border={true}
+              href={`angebote/${angebot?.slug?.current}`}
+            />
           ) : (
-            <Button value="Jetzt anfragen" border={true} />
+            <Button
+              value="Mehr Infos"
+              border={true}
+              href={`angebote/${angebot?.slug?.current}`}
+            />
           )}
         </div>
       </div>

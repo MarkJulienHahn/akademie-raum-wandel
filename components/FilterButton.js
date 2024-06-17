@@ -8,6 +8,7 @@ const FilterButton = ({ value, active, fct }) => {
       onClick={fct}
     >
       {value}
+      {active && <span className={"closeButton"}>X</span>}
     </div>
   );
 };

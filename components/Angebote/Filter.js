@@ -11,10 +11,12 @@ const Filter = ({ setAngeboteFiltered, personen, angebote }) => {
   const [showPerson, setShowPerson] = useState(false);
 
   const handleShowCategories = () => {
+    setShowPerson(false);
     setShowCategories(!showCategories);
   };
 
   const handleShowPerson = () => {
+    setShowCategories(false);
     setShowPerson(!showPerson);
   };
 
@@ -51,6 +53,12 @@ const Filter = ({ setAngeboteFiltered, personen, angebote }) => {
 
     setAngeboteFiltered(filteredAngebote);
   }, [filterKammer, filterCategory, filterDozierende, angebote]);
+
+  useEffect(() => {
+    !filterCategory && setShowCategories(false);
+    !filterDozierende && setShowPerson(false);
+  }, [filterCategory, filterDozierende]);
+
   return (
     <div className="filter">
       Filter
@@ -64,10 +72,20 @@ const Filter = ({ setAngeboteFiltered, personen, angebote }) => {
         </div>
 
         {!filterCategory ? (
-          <div className="filterButtonsColumn" style={{ width: "121px" }}>
-            <FilterButton value="Kategorie" fct={handleShowCategories} />
+          <div
+            className="filterButtonsColumn"
+            // style={{ width: "111px" }}
+          >
+            <FilterButton value="Formate" fct={handleShowCategories} />
+
             {showCategories && (
-              <>
+              <div
+                style={{
+                  position: "absolute",
+                  display: "block",
+                  marginTop: "42px",
+                }}
+              >
                 <FilterButton
                   value="Seminar"
                   active={filterCategory === "Seminar"}
@@ -83,7 +101,7 @@ const Filter = ({ setAngeboteFiltered, personen, angebote }) => {
                   active={filterCategory === "Ausbildung"}
                   fct={() => handleFilterCategory("Ausbildung")}
                 />
-              </>
+              </div>
             )}
           </div>
         ) : (
@@ -94,11 +112,20 @@ const Filter = ({ setAngeboteFiltered, personen, angebote }) => {
           />
         )}
         {!filterDozierende ? (
-          <div className="filterButtonsColumn" style={{ width: "120px" }}>
+          <div
+            className="filterButtonsColumn"
+            // style={{ width: "120px" }}
+          >
             <FilterButton value="Dozierende" fct={handleShowPerson} />
 
             {showPerson && (
-              <>
+              <div
+                style={{
+                  position: "absolute",
+                  display: "block",
+                  marginTop: "42px",
+                }}
+              >
                 {personen.map((person) => (
                   <FilterButton
                     value={person.name}
@@ -106,7 +133,7 @@ const Filter = ({ setAngeboteFiltered, personen, angebote }) => {
                     fct={() => handleFilterDozierende(person.name)}
                   />
                 ))}
-              </>
+              </div>
             )}
           </div>
         ) : (

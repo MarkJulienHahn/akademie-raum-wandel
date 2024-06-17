@@ -1,13 +1,12 @@
 "use client";
 
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import AngebotRow from "./AngebotRow";
 import AngebotRowVergangen from "./AngebotRowVergangen";
 import Filter from "./Filter";
 
 const Kalender = ({ angebote, personen }) => {
-  const [angeboteFiltered, setAngeboteFiltered] = useState(angebote);
+  const [angeboteFiltered, setAngeboteFiltered] = useState([]);
 
   return (
     <div>

@@ -97,13 +97,17 @@ const Nav = ({ locale }) => {
         ))}
       </div>
       <div className="navLocale">
-        <Link href={`/${neutralPath}`} locale="de">
+        <NavEntry
+          entry={{ title: "FAQs", slug: "faq" }}
+          neutralPath={neutralPath}
+        />
+        {/* <Link href={`/${neutralPath}`} locale="de">
           <span style={locale == "de" ? active : inactive}>De</span>
         </Link>{" "}
         /{" "}
         <Link href={`/${neutralPath}`} locale="en">
           <span style={locale !== "de" ? active : inactive}>En</span>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

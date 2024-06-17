@@ -33,8 +33,8 @@ export default defineType({
     {
       name: "kategorie",
       title: "Kategorie",
-      type: "array",
-      of: [{ type: "string" }],
+      type: "string",
+      // of: [{ type: "string" }],
       options: {
         list: [
           { title: "Seminar", value: "Seminar" },
@@ -67,6 +67,13 @@ export default defineType({
       options: {
         precision: 2,
       },
+    },
+
+    {
+      name: "buchungsLink",
+      title: "Buchungslink",
+      type: "string",
+      validation: (Rule) => Rule.required(),
     },
 
     {
@@ -127,18 +134,30 @@ export default defineType({
       title: "Aufzeichnung?",
       type: "boolean",
     },
+
     {
       name: "zoom",
       title: "Per Zoom?",
       type: "boolean",
       options: {
-        default: true
-      }
+        default: true,
+      },
     },
     {
       name: "preisAufzeichnung",
       title: "Preis Aufzeichnung",
       type: "number",
+      validation: (Rule) => Rule.required().min(0).precision(2),
+      options: {
+        precision: 2,
+      },
+      hidden: ({ document }) => !document?.aufzeichnung,
+    },
+
+    {
+      name: "aufzeichnungsLink",
+      title: "Aufzeichnungslink",
+      type: "string",
       validation: (Rule) => Rule.required().min(0).precision(2),
       options: {
         precision: 2,
@@ -208,29 +227,37 @@ export default defineType({
       ],
     },
 
-    {
-      name: "hintergrund",
-      title: "Hintergrund",
-      type: "string",
-      validation: (Rule) =>
-        Rule.required().warning(
-          "Bitte eine Auswahl für den Hintergrund treffen"
-        ),
-      options: {
-        list: [
-          { title: "Dunkel", value: "dunkel" },
-          { title: "Hell", value: "hell" },
-          { title: "Blur", value: "blur" },
-        ],
-        layout: "radio",
-      },
-    },
+    // {
+    //   name: "hintergrund",
+    //   title: "Hintergrund",
+    //   type: "string",
+    //   validation: (Rule) =>
+    //     Rule.required().warning(
+    //       "Bitte eine Auswahl für den Hintergrund treffen"
+    //     ),
+    //   options: {
+    //     list: [
+    //       { title: "Dunkel", value: "dunkel" },
+    //       { title: "Hell", value: "hell" },
+    //       { title: "Blur", value: "blur" },
+    //     ],
+    //     layout: "radio",
+    //   },
+    // },
 
     {
       name: "blurImage",
       title: "Blur Image",
       type: "image",
-      hidden: ({ document }) => document?.hintergrund !== "blur",
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const { kategorie } = context.document;
+          if (kategorie == "Seminar" && !value) {
+            return "Blur Image is required when Kategorie is Seminar";
+          }
+          return true;
+        }),
+      hidden: ({ document }) => document?.kategorie !== "Seminar",
     },
 
     {
@@ -238,7 +265,9 @@ export default defineType({
       title: "Slug",
       type: "slug",
       validation: (Rule) =>
-        Rule.required().warning("Bitte einen einzigartigen SLUG generieren. Der Slug darf bei zwei gleichen Seminaren nicht der selbe sein."),
+        Rule.required().warning(
+          "Bitte einen einzigartigen SLUG generieren. Der Slug darf bei zwei gleichen Seminaren nicht der selbe sein."
+        ),
       options: {
         source: (doc) => {
           const title = doc.title;
@@ -248,8 +277,6 @@ export default defineType({
         maxLength: 200,
       },
     },
-
-
 
     orderRankField({ type: "angebote" }),
   ],

@@ -3,7 +3,7 @@
   --light: #ede9de;
   --white: #ffffff;
 
-  --neonGreen: rgb(217, 254, 96);
+  --yellow: rgba(246, 254, 96, 0.672);
 
   --space-XS: 4px;
   --space-S: 18px;
@@ -120,7 +120,7 @@ ul {
 }
 
 ::selection {
-  background: var(--neonGreen);
+  background: var(--yellow);
 }
 
 /* NAV */
@@ -170,6 +170,7 @@ ul {
   margin: var(--space-XS);
   border: 1.5px solid var(--dark);
   white-space: nowrap;
+  display: block;
 }
 
 .buttonLight {
@@ -241,6 +242,13 @@ ul {
   /* padding-right: 50px; */
 }
 
+.closeButton {
+  padding-left: 20px;
+  /* position: absolute; */
+  /* right: 0; */
+  /* color: red; */
+}
+
 /* HOME */
 
 .homeBody {
@@ -248,6 +256,7 @@ ul {
   position: relative;
   background: var(--white);
   padding-bottom: var(--space-XL);
+  overflow: hidden;
 }
 
 .homeSpacer {
@@ -339,12 +348,13 @@ ul {
   height: 100%;
   background-size: cover;
   background-position: center;
-  transition: transform 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   z-index: 0;
 }
 
 .homeCallWrapper:hover::before {
   transform: scale(1.1);
+  filter: brightness(0.8);
 }
 
 .homeCallWrapper > * {
@@ -515,6 +525,10 @@ ul {
 .kachelWrapper h1 {
   margin: var(--space-L) 0 0;
   hyphens: auto;
+  font-size: 70pt;
+  line-height: 65pt;
+  letter-spacing: -2px;
+  font-family: "Siggnal-Light";
 }
 
 .kachelSubhead {
@@ -559,7 +573,7 @@ ul {
   position: absolute;
   color: var(--light);
   background: var(--dark);
-  padding: 5px 13px;
+  padding: 5px 17px;
   margin-top: 10px;
 }
 
@@ -858,6 +872,7 @@ ul {
   color: var(--light);
   position: relative;
   padding: var(--space-M) var(--space-S) var(--space-S);
+  overflow: hidden;
 }
 
 .footerTop {
@@ -983,7 +998,16 @@ ul {
   grid-column: 4 / 5;
   display: block;
   position: absolute;
-  right: var(--space-M);
+  right: var(--space-S);
+}
+
+.singleBodyButton .button {
+  font-size: var(--fontSize-L);
+  line-height: 60px;
+  letter-spacing: var(--letterSpacing-L);
+  padding: 7px var(--space-M);
+  border-radius: 50px;
+  border: 3px solid;
 }
 
 .singleBodyPrice {
@@ -1017,7 +1041,7 @@ ul {
   text-align: center;
   width: 100vw;
   width: 100vw;
-  top: 80px;
+  top: 120px;
   z-index: 1;
 }
 
@@ -1100,7 +1124,7 @@ ul {
   right: var(--space-S);
   padding: var(--space-M) 30px 28px 30px;
   width: 459px;
-  background: rgb(147 239 8 / 60%);
+  background: var(--yellow);
   z-index: 10000;
   border-radius: 15px;
   backdrop-filter: blur(20px);
@@ -1131,5 +1155,76 @@ ul {
   }
   100% {
     transform: translateX(0%);
+  }
+}
+
+.headerWrapper p {
+  padding: 0 var(--space-S);
+}
+
+.navMobile {
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  :root {
+    /* --space-XS: 4px; */
+    --space-S: 10px;
+    --space-M: 24px;
+    /*    --space-L: 108px;
+    --space-XL: 216px; */
+
+    --fontSize-XS: 12px;
+    --lineHeight-XS: 15px;
+    --letterSpacing-XS: 0.1px;
+    --wordSpacing-XS: -1px;
+
+    --fontSize-S: 12px;
+    --lineHeight-S: 15px;
+    --letterSpacing-S: 0.1px;
+    --wordSpacing-S: -1px;
+
+    --fontSize-M: 18px;
+    --lineHeight-M: 22px;
+    --letterSpacing-M: -0.45px;
+
+    --fontSize-L: 30px;
+    --lineHeight-L: 35px;
+    --letterSpacing-L: 0px;
+
+    --fontSize-XL: 120px;
+    --lineHeight-XL: 100px;
+    --letterSpacing-XL: -4px;
+  }
+
+  .faqQuestion {
+    line-height: var(--lineHeight-M);
+  }
+  .navDesktop {
+    display: none;
+  }
+  .navMobile {
+    display: block;
+  }
+  .navLogo {
+    top: 5px;
+    left: 8px;
+  }
+  .navMenuMobile {
+    position: fixed;
+    z-index: 2000;
+    width: 100vw;
+    background: white;
+    padding: var(--space-S);
+    padding-top: var(--space-L);
+    transition: all 0.2s ease;
+  }
+  .navMenuMobile {
+    font-size: var(--fontSize-L);
+    letter-spacing: var(--letterSpacing-L);
+    line-height: 40px;
+  }
+  .faqQuestionWrapper p {
+    /* padding-bottom: var(--space-S); */
   }
 }

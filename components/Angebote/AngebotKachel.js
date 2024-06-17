@@ -51,24 +51,19 @@ const AngebotKachel = ({ angebot, locale }) => {
     inTheFuture && (
       <div
         style={
-          angebot?.hintergrund == "dunkel"
-            ? dark
-            : angebot?.hintergrund == "blur"
-              ? blur
-              : hell
+          angebot?.kategorie == "Seminar"
+            ? blur
+            : angebot?.kategorie == "Ausbildung"
+              ? hell
+              : dark
         }
         className="kachelWrapper"
       >
-        <h2>
-          {angebot?.kategorie.map((kategorie, i, arr) => (
-            <span key={i}>
-              {kategorie}
-              {i < arr.length - 1 ? " / " : ""}
-            </span>
-          ))}
-        </h2>
+        <h2>{angebot?.kategorie}</h2>
         <h1>{angebot?.title}</h1>
-        {angebot?.subtitle && <h2 className="kachelSubhead">{angebot?.subtitle}</h2>}
+        {angebot?.subtitle && (
+          <h2 className="kachelSubhead">{angebot?.subtitle}</h2>
+        )}
         <div className="kachelDescr">
           <PortableText value={angebot.descriptionShort} />
         </div>
@@ -101,7 +96,7 @@ const AngebotKachel = ({ angebot, locale }) => {
 
         <div className="angebotButtonWrapper">
           <Button
-            value={locale == "de" ? "Mehr erfahren" : "Learn more"}
+            value={"Mehr erfahren"}
             light={angebot?.hintergrund == "hell" ? false : true}
             href={`angebote/${angebot?.slug?.current}`}
           />

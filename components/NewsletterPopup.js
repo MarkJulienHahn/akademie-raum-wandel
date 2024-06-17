@@ -7,10 +7,14 @@ const visible = { opacity: 1 };
 const inVisible = { opacity: 0, pointerEvents: "none" };
 
 const NewsletterPopup = ({ content }) => {
-  // Retrieve the initial state from session storage or default to true
-  const initialShowState = typeof window !== "undefined" && sessionStorage.getItem("newsletterShow") === "false" ? false : true;
-  
-  const [show, setShow] = useState(initialShowState);
+  const [show, setShow] = useState(true);
+
+  // Retrieve the initial state from session storage on client-side mount
+  useEffect(() => {
+    const initialShowState =
+      sessionStorage.getItem("newsletterShow") === "false" ? false : true;
+    setShow(initialShowState);
+  }, []);
 
   // Synchronize the state with session storage
   useEffect(() => {

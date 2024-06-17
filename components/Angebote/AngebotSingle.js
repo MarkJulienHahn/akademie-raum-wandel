@@ -33,17 +33,27 @@ const numbersDE = {
   20: "Zwanzig Termine",
 };
 
+const variants = {
+  hidden: { opacity: 1, y: 1000 },
+  enter: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: 0 },
+};
+
 import Button from "../Button";
 
 const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
-  console.log(angebot, slug);
   const key = usePathname();
 
-  const variants = {
-    hidden: { opacity: 1, y: 1000 },
-    enter: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: 0 },
-  };
+  const getLatestDate = (termine) =>
+    termine.reduce(
+      (latest, termin) =>
+        new Date(termin.date) > latest ? new Date(termin.date) : latest,
+      new Date(termine[0].date)
+    );
+
+  const today = new Date();
+  const latestDate = getLatestDate(angebot.termine);
+  const inTheFuture = latestDate > today;
 
   return (
     <AnimatePresence mode="popLayout">
@@ -73,12 +83,8 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
               }}
             >
               <h2 className="singleCategory">
-                {angebot?.kategorie.map((kategorie, i, arr) => (
-                  <span key={i}>
-                    {kategorie}
-                    {i < arr.length - 1 ? " / " : ""}
-                  </span>
-                ))}
+                {angebot?.kategorie}{" "}
+                {!inTheFuture && angebot?.aufzeichnung && " (Aufzeichnung)"}
               </h2>
               <h1
                 className="singleHeadline"
@@ -106,9 +112,23 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
                 <PortableText value={angebot.description} />
               </div>
               <div className="singleBodyData">
-                <div className="singleBodyPrice">{angebot.preis} €</div>
+                <div className="singleBodyPrice">
+                  {angebot?.aufzeichnung && !inTheFuture
+                    ? angebot.preisAufzeichnung + " €"
+                    : !angebot?.aufzeichnung && !inTheFuture
+                      ? ""
+                      : angebot.preis + " €"}
+                </div>
 
-                <div className="singleBodyDates">
+                <div
+                  className="singleBodyDates"
+                  style={{
+                    paddingTop:
+                      !inTheFuture && !angebot?.aufzeichnung
+                        ? "0px"
+                        : "var(--space-M)",
+                  }}
+                >
                   {angebot.termine.map((termin, i) => (
                     <div key={i}>
                       {formatDateDE(termin?.date)} / {termin?.start} —{" "}
@@ -131,7 +151,16 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
                 </div>
               </div>
               <div className="singleBodyButton">
-                <Button value={"Jetzt buchen"} />
+                {angebot?.aufzeichnung && !inTheFuture ? (
+                  <Button
+                    value={"Jetzt Aufzeichnung runterladen"}
+                    href={angebot?.aufzeichnungsLink}
+                  />
+                ) : !angebot?.aufzeichnung && !inTheFuture ? (
+                  ""
+                ) : (
+                  <Button value={"Jetzt buchen"} href={angebot?.buchungsLink} />
+                )}
               </div>
             </div>
           </div>
@@ -178,7 +207,7 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
           )}
           <h2 className="singleWeitereHead borderTop">
             <Link href={"/kalender"} scroll={false}>
-              Alle Angebote ({angebote.length +1})
+              Alle Angebote ({angebote.length + 1})
             </Link>
           </h2>
         </div>

@@ -1,4 +1,5 @@
 import { PortableText } from "next-sanity";
+import { Link } from "@/navigation";
 
 import { formatDateDE, formatDateEN } from "../Dates";
 import Button from "../Button";
@@ -45,15 +46,7 @@ const AngebotRow = ({ angebot }) => {
     inTheFuture && (
       <div className="angebotRow">
         <div className="katRow">
-          <p>
-            {" "}
-            {angebot?.kategorie.map((kategorie, i, arr) => (
-              <span key={i}>
-                {kategorie}
-                {i < arr.length - 1 ? <br /> : ""}
-              </span>
-            ))}
-          </p>
+          <p>{angebot?.kategorie}</p>
           {angebot?.kammer && (
             <div className="kammer kammerRow">
               Kammer-
@@ -63,8 +56,12 @@ const AngebotRow = ({ angebot }) => {
           )}
         </div>
         <div className="discRow">
-          <h1 className="rowHeadline">{angebot?.title}</h1>
-          <h1 className="rowHeadline" style={{ marginTop: "-17px" }}>{angebot?.subtitle}</h1>
+          <Link href={`angebote/${angebot?.slug?.current}`}>
+            <h1 className="rowHeadline">{angebot?.title}</h1>
+            <h1 className="rowHeadline" style={{ marginTop: "-17px" }}>
+              {angebot?.subtitle}
+            </h1>
+          </Link>
           <PortableText value={angebot.descriptionShort} />
         </div>
         <div className="datesRow">
