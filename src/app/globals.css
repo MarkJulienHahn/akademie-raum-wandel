@@ -299,16 +299,27 @@ ul {
 }
 
 .homeSectionWrapper {
-  padding: var(--space-L) var(--space-S);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: var(--space-L) 0;
+  /* margin: 0 var(--space-M); */
   width: 100%;
+  overflow: visible;
 }
 
 .homeAngeboteWrapper {
   display: flex;
   margin-top: var(--space-S);
+}
+
+.homeAngeboteWrapperMobile {
+  display: none;
+}
+
+.homeAboutOuter {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: var(--space-XL) 0;
 }
 
 .homeAboutWrapper {
@@ -593,6 +604,10 @@ ul {
   margin-top: -5px;
 }
 
+.rowHeadlineBottom {
+  margin-top: -17px;
+}
+
 .angebotRow {
   border-top: 1.5px solid;
   display: grid;
@@ -660,6 +675,12 @@ ul {
   font-size: var(--fontSize-M);
   line-height: var(--lineHeight-M);
   letter-spacing: var(--letterSpacing-M);
+}
+
+.swiperTester {
+  width: 30vw;
+  height: 500px;
+  background: red;
 }
 
 .buttonRow {
@@ -1179,24 +1200,27 @@ ul {
     --letterSpacing-XS: 0.1px;
     --wordSpacing-XS: -1px;
 
-    --fontSize-S: 12px;
-    --lineHeight-S: 15px;
+    --fontSize-S: 14px;
+    --lineHeight-S: 19px;
     --letterSpacing-S: 0.1px;
-    --wordSpacing-S: -1px;
+    --wordSpacing-S: -1.3px;
 
     --fontSize-M: 18px;
     --lineHeight-M: 22px;
     --letterSpacing-M: -0.45px;
 
     --fontSize-L: 30px;
-    --lineHeight-L: 35px;
-    --letterSpacing-L: 0px;
+    --lineHeight-L: 33px;
+    --letterSpacing-L: -1.1px;
 
     --fontSize-XL: 120px;
     --lineHeight-XL: 100px;
     --letterSpacing-XL: -4px;
   }
-
+  html,
+  body {
+    overflow-x: hidden;
+  }
   .faqQuestion {
     line-height: var(--lineHeight-M);
   }
@@ -1224,7 +1248,170 @@ ul {
     letter-spacing: var(--letterSpacing-L);
     line-height: 40px;
   }
-  .faqQuestionWrapper p {
-    /* padding-bottom: var(--space-S); */
+
+  .button {
+    padding: 15px 20px;
+    border-radius: 30px;
+    margin: var(--space-XS);
+    /* border: 1.5px solid var(--dark); */
+    text-align: center;
+    white-space: nowrap;
+    display: block;
+  }
+
+  .homeSectionWrapper {
+    align-items: unset;
+  }
+  .homeSectionWrapper h3 {
+    text-align: center;
+  }
+  .homeAboutWrapper h1 {
+    padding: 0 var(--space-S) var(--space-S);
+  }
+  .headerButtonsWrapper {
+    margin-top: var(--space-M);
+    margin-left: 15%;
+    display: block;
+    width: 70%;
+  }
+  .overflowPadding {
+    height: 50px;
+  }
+  .homeAngeboteWrapper {
+    display: none;
+  }
+
+  .homeAngeboteWrapperMobile {
+    display: block;
+    padding-top: var(--space-S);
+  }
+
+  .kachelWrapper {
+    max-width: unset;
+  }
+  .kachelWrapper h1 {
+    margin: var(--space-M) 0 0;
+    font-size: 30pt;
+    line-height: 35pt;
+    letter-spacing: -1px;
+  }
+  .homeAboutOuter {
+    margin-top: var(--space-S);
+  }
+  .homeAboutWrapper {
+    padding: 0 var(--space-S);
+  }
+  .sectionWrapper {
+    display: block;
+    padding: var(--space-S);
+  }
+  .sectionWrapper .imgColumn {
+    width: 100%;
+  }
+  .sectionWrapper .txtWrapper {
+    margin-top: var(--space-M);
+    width: 100%;
+    padding-left: 0;
+  }
+  .sectionWrapper .txtWrapper h2 {
+    font-size: 28pt;
+    line-height: 28pt;
+    letter-spacing: -1.5px;
+    padding-bottom: var(--space-M);
+  }
+  .txtTwoColumn {
+    display: block;
+  }
+  .txtTwoColumn p {
+    padding-bottom: var(--space-S);
+  }
+  .txtWrapper .disclaimer {
+    padding-top: var(--space-S);
+    font-family: "MJH-Bold";
+    max-width: 100%;
+  }
+  .txtWrapper .buttonContainer {
+    margin-top: var(--space-M);
+    position: relative;
+  }
+  .prefooterWrapper {
+    padding: var(--space-S) var(--space-S) 0;
+    display: block;
+  }
+  .prefooterLeft {
+    padding-bottom: var(--space-M);
+  }
+  .footerBottom .newsletterSignup {
+    display: none;
+  }
+  .footerCenter {
+    display: none;
+  }
+  .siteMap {
+    width: 100%;
+    padding-bottom: var(--space-S);
+  }
+  .siteMap li {
+    margin-left: 0;
+  }
+  .newsletterPopupWrapper {
+    width: calc(100vw - 2 * var(--space-S));
+    left: var(--space-S);
+    padding: var(--space-M) 10px 18px 15px;
+  }
+  .newsletterSignup p {
+    width: unset;
+  }
+  .newsletterSignup input {
+    margin-top: var(--space-M);
+    width: 100%;
+    padding: 13px 20px 13px;
+    border-radius: 30px;
+  }
+  .rowHeadlineBottom {
+    line-height: 25pt;
+  }
+  .angebotRow {
+    display: block;
+  }
+  .discRow {
+    padding-bottom: var(--space-S);
+  }
+  .dateRow {
+    padding-bottom: var(--space-S);
+  }
+  .buttonRow {
+    position: relative;
+    width: 100vw;
+    padding: 0 10px;
+  }
+  .kammerRow {
+    position: relative;
+    background: white;
+    color: var(--dark);
+    padding: 5px 17px;
+    margin-top: 10px;
+  }
+  .datesRow {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: var(--space-S);
+  }
+  .dates,
+  .persRow {
+    width: 50%;
+  }
+  .filter {
+    position: fixed;
+    top: 11px;
+  }
+
+  .filterButtons {
+    display: block;
+    flex-wrap: wrap;
+  }
+  .filterButton {
+    max-width: 240px;
+    line-height: 0.5;
   }
 }

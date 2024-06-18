@@ -63,13 +63,13 @@ const Filter = ({ setAngeboteFiltered, personen, angebote }) => {
     <div className="filter">
       Filter
       <div className="filterButtons">
-        <div>
+
           <FilterButton
             value="Kammeranrechnungsfähig"
             active={filterKammer}
             fct={handleFilterKammer}
           />
-        </div>
+
 
         {!filterCategory ? (
           <div

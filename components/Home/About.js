@@ -6,7 +6,7 @@ const About = ({ content }) => {
   const backgroundImageUrl = content?.image?.url?.url;
 
   return (
-    <div className="homeSectionWrapper">
+    <div className="homeAboutOuter">
       <div className="homeAboutWrapper">
         <h1>{content?.headline}</h1>
         <PortableText value={content?.text} />

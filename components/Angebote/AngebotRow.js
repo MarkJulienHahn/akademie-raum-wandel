@@ -58,7 +58,7 @@ const AngebotRow = ({ angebot }) => {
         <div className="discRow">
           <Link href={`angebote/${angebot?.slug?.current}`}>
             <h1 className="rowHeadline">{angebot?.title}</h1>
-            <h1 className="rowHeadline" style={{ marginTop: "-17px" }}>
+            <h1 className="rowHeadline rowHeadlineBottom">
               {angebot?.subtitle}
             </h1>
           </Link>
