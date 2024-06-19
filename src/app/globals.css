@@ -737,6 +737,7 @@ ul {
 .personImg {
   position: relative;
   margin-right: var(--space-S);
+  height: 650px;
 }
 
 .personInfo {

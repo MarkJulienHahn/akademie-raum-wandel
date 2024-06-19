@@ -3,8 +3,13 @@
 import React, { useState, useEffect } from "react";
 import NewsletterSignup from "./Footer/NewsletterSignup";
 
-const visible = { opacity: 1 };
-const inVisible = { opacity: 0, pointerEvents: "none" };
+// Styles for visibility
+const visible = { opacity: 1, transition: "opacity 0.5s ease-in-out" };
+const inVisible = {
+  opacity: 0,
+  pointerEvents: "none",
+  transition: "opacity 0.5s ease-in-out",
+};
 
 const NewsletterPopup = ({ content }) => {
   const [show, setShow] = useState(true);
@@ -12,7 +17,7 @@ const NewsletterPopup = ({ content }) => {
   // Retrieve the initial state from session storage on client-side mount
   useEffect(() => {
     const initialShowState =
-      sessionStorage.getItem("newsletterShow") === "false" ? false : true;
+      sessionStorage.getItem("newsletterShow") !== "false";
     setShow(initialShowState);
   }, []);
 
@@ -21,13 +26,17 @@ const NewsletterPopup = ({ content }) => {
     sessionStorage.setItem("newsletterShow", show);
   }, [show]);
 
+  // Handle click to toggle popup visibility
   const handleClick = () => {
     setShow(!show);
   };
 
   return (
     <div className="newsletterPopupWrapper" style={show ? visible : inVisible}>
-      <div className="newsletterClose" onClick={handleClick}>
+      <div
+        className="newsletterClose"
+        onClick={handleClick}
+      >
         X
       </div>
       <NewsletterSignup show={show} content={content} />

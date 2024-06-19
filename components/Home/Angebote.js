@@ -13,9 +13,10 @@ const Angebote = ({ content, locale }) => {
     entry.termine.some((termin) => new Date(termin.date) > today)
   );
 
-  const swiperRef = useRef(null);
+  const swiperRefDesktop = useRef(null);
+  const swiperRefMobile = useRef(null);
 
-  const handleSlideClick = (index) => {
+  const handleSlideClick = (index, swiperRef) => {
     if (swiperRef.current && swiperRef.current.slideTo) {
       swiperRef.current.slideTo(index);
     }
@@ -31,14 +32,14 @@ const Angebote = ({ content, locale }) => {
           centeredSlides={true}
           initialSlide={1}
           onSwiper={(swiper) => {
-            swiperRef.current = swiper;
+            swiperRefDesktop.current = swiper;
           }}
         >
           {futureContent.map(
             (entry, i) =>
               i <= 5 && (
                 <SwiperSlide key={i}>
-                  <span onClick={() => handleSlideClick(i)}>
+                  <span onClick={() => handleSlideClick(i, swiperRefDesktop)}>
                     <AngebotKachel angebot={entry} locale={locale} />
                   </span>
                 </SwiperSlide>
@@ -53,14 +54,14 @@ const Angebote = ({ content, locale }) => {
           centeredSlides={true}
           initialSlide={1}
           onSwiper={(swiper) => {
-            swiperRef.current = swiper;
+            swiperRefMobile.current = swiper;
           }}
         >
           {futureContent.map(
             (entry, i) =>
               i <= 5 && (
                 <SwiperSlide key={i}>
-                  <span onClick={() => handleSlideClick(i)}>
+                  <span onClick={() => handleSlideClick(i, swiperRefMobile)}>
                     <AngebotKachel angebot={entry} locale={locale} />
                   </span>
                 </SwiperSlide>
