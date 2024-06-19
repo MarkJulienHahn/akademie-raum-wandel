@@ -24,15 +24,15 @@ export default async function page() {
           <span className="kontaktColumnLeft">Adresse</span>
           <span>{contact[0]?.address?.street}</span>
         </div>
-        <div>
-          <span className="kontaktColumnLeft"></span>
+        <div >
+          <span className="kontaktColumnLeft hideMobile"></span>
           <span>
             {contact[0]?.address?.plz}{" "}
             {contact[0]?.address?.city}
           </span>
         </div>
-        <div>
-          <span className="kontaktColumnLeft"></span>
+        <div >
+          <span className="kontaktColumnLeft hideMobile"></span>
           <span>
             {contact[0]?.address?.country}
           </span>

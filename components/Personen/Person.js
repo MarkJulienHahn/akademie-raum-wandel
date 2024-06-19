@@ -6,7 +6,11 @@ const Person = ({ person }) => {
   return (
     <>
       <div className="personImg">
-        <Image src={person.portrait.asset.url} fill />
+        <Image
+          src={person.portrait.asset.url}
+          fill
+          style={{ objectFit: "cover", objectPosition: "center", borderRadius: "10px" }}
+        />
       </div>
       <div className="personInfo">
         <h3>{person?.rolle}</h3>

@@ -7,6 +7,35 @@ import Filter from "./Filter";
 
 const Kalender = ({ angebote, personen }) => {
   const [angeboteFiltered, setAngeboteFiltered] = useState([]);
+  const [shouldFadeIn, setShouldFadeIn] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerWidth < 1000) {
+        setShouldFadeIn(window.scrollY > 100);
+      } else {
+        setShouldFadeIn(false);
+      }
+    };
+
+    const handleResize = () => {
+      if (window.innerWidth >= 1000) {
+        setShouldFadeIn(false);
+      } else {
+        handleScroll();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div>
@@ -14,6 +43,7 @@ const Kalender = ({ angebote, personen }) => {
         setAngeboteFiltered={setAngeboteFiltered}
         personen={personen}
         angebote={angebote}
+        className={shouldFadeIn ? "" : "fade-in"}
       />
       {angeboteFiltered.map((angebot, i) => (
         <div key={i}>

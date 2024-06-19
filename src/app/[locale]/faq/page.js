@@ -8,7 +8,7 @@ export default async function page() {
     <main className={"faqOuter"}>
       {faq.map((questions, i) => (
         <div key={i}>
-          <FaqSection questions={questions} />
+          <FaqSection questions={questions} sectionIndex={i}/>
         </div>
       ))}
     </main>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import FilterButton from "../FilterButton";
 
-const Filter = ({ setAngeboteFiltered, personen, angebote }) => {
+const Filter = ({ setAngeboteFiltered, personen, angebote, className }) => {
   const [filterKammer, setFilterKammer] = useState(false);
   const [filterCategory, setFilterCategory] = useState("");
   const [filterDozierende, setFilterDozierende] = useState("");
@@ -60,16 +60,14 @@ const Filter = ({ setAngeboteFiltered, personen, angebote }) => {
   }, [filterCategory, filterDozierende]);
 
   return (
-    <div className="filter">
+    <div className={`filter ${className}`}>
       Filter
       <div className="filterButtons">
-
-          <FilterButton
-            value="Kammeranrechnungsfähig"
-            active={filterKammer}
-            fct={handleFilterKammer}
-          />
-
+        <FilterButton
+          value="Kammeranrechnungsfähig"
+          active={filterKammer}
+          fct={handleFilterKammer}
+        />
 
         {!filterCategory ? (
           <div

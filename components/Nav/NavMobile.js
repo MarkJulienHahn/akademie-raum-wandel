@@ -34,7 +34,7 @@ const NavMobile = ({ locale }) => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY || window.pageYOffset;
-      if (scrollY > 200) {
+      if (scrollY > 50) {
         setTop(false);
       } else {
         setTop(true);

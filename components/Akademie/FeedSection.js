@@ -24,7 +24,11 @@ const FeedSection = ({ entry, i }) => {
       </div>
       <div className="feedSectionImage">
         <h1>{entry.thema}</h1>
-        <Image src={entry.background?.asset.url} fill />
+        <Image
+          src={entry.background?.asset.url}
+          fill
+          style={{ objectFit: "cover" }}
+        />
       </div>
     </div>
   );

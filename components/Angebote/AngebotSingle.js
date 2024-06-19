@@ -102,7 +102,7 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
               )}
             </div>
           </div>
-          <div style={{ height: "60vh" }}></div>
+          <div className="singleContentSpacer"></div>
           <div className="singleContent">
             <div className="introText">
               <PortableText value={angebot.descriptionShort} />

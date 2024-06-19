@@ -242,6 +242,14 @@ ul {
   /* padding-right: 50px; */
 }
 
+.fade-in {
+  opacity: 0;
+}
+
+.fade-in.visible {
+  opacity: 1;
+}
+
 .closeButton {
   padding-left: 20px;
   /* position: absolute; */
@@ -699,6 +707,7 @@ ul {
   letter-spacing: var(--letterSpacing-XS);
   text-align: center;
   z-index: 100;
+  transition: opacity 0.2s ease-in;
 }
 
 .filterButtons {
@@ -995,6 +1004,10 @@ ul {
   position: relative;
 }
 
+.singleContentSpacer {
+  height: 60vh;
+}
+
 .introText {
   font-size: var(--fontSize-L);
   line-height: var(--lineHeight-L);
@@ -1055,6 +1068,7 @@ ul {
   letter-spacing: var(--letterSpacing-XL);
   color: var(--light);
   font-family: "Siggnal-Light";
+  hyphens: auto;
 }
 
 .singleCategory {
@@ -1192,8 +1206,8 @@ ul {
     /* --space-XS: 4px; */
     --space-S: 10px;
     --space-M: 24px;
-    /*    --space-L: 108px;
-    --space-XL: 216px; */
+    --space-L: 60px;
+    --space-XL: 100px;
 
     --fontSize-XS: 12px;
     --lineHeight-XS: 15px;
@@ -1213,9 +1227,9 @@ ul {
     --lineHeight-L: 33px;
     --letterSpacing-L: -1.1px;
 
-    --fontSize-XL: 120px;
-    --lineHeight-XL: 100px;
-    --letterSpacing-XL: -4px;
+    --fontSize-XL: 80px;
+    --lineHeight-XL: 80px;
+    --letterSpacing-XL: -3px;
   }
   html,
   body {
@@ -1338,8 +1352,14 @@ ul {
     padding: var(--space-S) var(--space-S) 0;
     display: block;
   }
-  .prefooterLeft {
+  .prefooterLeft,
+  .prefooterRight {
     padding-bottom: var(--space-M);
+  }
+  .prefooterLeft h2 {
+    font-size: 30px;
+    line-height: 32px;
+    letter-spacing: -1px;
   }
   .footerBottom .newsletterSignup {
     display: none;
@@ -1399,7 +1419,10 @@ ul {
   }
   .dates,
   .persRow {
-    width: 50%;
+    width: 100%;
+  }
+  .persRow {
+    margin-bottom: var(--space-M);
   }
   .filter {
     position: fixed;
@@ -1413,5 +1436,84 @@ ul {
   .filterButton {
     max-width: 240px;
     line-height: 0.5;
+  }
+  .feedSection {
+    display: block;
+  }
+  .feedSectionColumn,
+  .feedSectionImage {
+    width: 100%;
+  }
+  .feedSectionImage {
+    min-height: unset;
+    height: 100vw;
+    margin-top: var(--space-S);
+  }
+  .leisteWrapper {
+    display: block;
+    padding: var(--space-M) 0;
+  }
+  .leisteSection {
+    width: 100%;
+    margin-bottom: var(--space-L);
+  }
+  .personenWrapper,
+  .person {
+    display: block;
+  }
+  .person,
+  .personInfo {
+    width: 100%;
+  }
+  .personImg {
+    width: 100%;
+    height: 100vw;
+    margin-bottom: var(--space-S);
+  }
+  .kontaktColumnLeft {
+    font-size: var(--fontSize-S);
+    line-height: var(--lineHeight-S);
+    letter-spacing: var(--letterSpacing-S);
+  }
+  .hideMobile {
+    display: none;
+  }
+  .kontaktWrapper {
+    height: 75vh;
+  }
+  .singleContentSpacer {
+    height: 90vh;
+  }
+  .singleBody {
+    display: block;
+  }
+  .singleBodyPrice {
+    margin-top: var(--space-M);
+  }
+  .singleBodyButton {
+    position: relative;
+    margin-top: var(--space-M);
+    width: 100vw;
+  }
+  .introText {
+    font-size: var(--fontSize-M);
+    line-height: var(--lineHeight-M);
+    letter-spacing: var(--letterSpacing-M);
+  }
+  .singlePesons {
+    padding: 0;
+  }
+  .singlePerson {
+    display: block;
+  }
+  .singlePersonInfo,
+  .singlePersonInfoInner {
+    width: 100%;
+  }
+  .singlePersonImg {
+    position: relative;
+    margin-top: var(--space-S);
+    height: 100vw;
+    width: 100%;
   }
 }
