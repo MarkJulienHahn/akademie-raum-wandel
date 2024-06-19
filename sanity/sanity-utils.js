@@ -84,3 +84,16 @@ export async function getPrefooter() {
 export async function getFooter() {
   return client.fetch(groq`*[_type == "footer"]{...}`);
 }
+
+export async function getImprint() {
+  return client.fetch(
+    groq`*[_type == "imprint"]
+    {...}`
+  );
+}
+export async function getPrivacy() {
+  return client.fetch(
+    groq`*[_type == "privacy"]
+    {...}`
+  );
+}

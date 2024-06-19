@@ -16,7 +16,7 @@ export default defineType({
           styles: [{ title: "Normal", value: "normal" }],
           lists: [],
           marks: {
-            decorators: [{ title: "Emphasis", value: "em" }],
+            decorators: [{ title: "Bold", value: "strong" }],
           },
         },
       ],

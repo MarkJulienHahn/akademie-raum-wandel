@@ -1202,6 +1202,18 @@ ul {
   display: none;
 }
 
+.imprintWrapper {
+  margin-top: var(--space-XL);
+  padding: var(--space-S);
+  width: 50%;
+}
+
+@media screen and (max-width: 1500px) {
+  .imprintWrapper {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 1000px) {
   :root {
     /* --space-XS: 4px; */
