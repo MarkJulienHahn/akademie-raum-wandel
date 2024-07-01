@@ -55,6 +55,14 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
   const latestDate = getLatestDate(angebot.termine);
   const inTheFuture = latestDate > today;
 
+  const dark = { background: "var(--dark)", color: "var(--light)" };
+  const hell = { background: "var(--light)", color: "var(--dark)" };
+  const blur = {
+    backgroundSize: "cover",
+    backgroundImage: `url(${angebot?.blurImageUrl})`,
+    color: "var(--light)",
+  };
+
   return (
     <AnimatePresence mode="popLayout">
       <motion.div
@@ -68,19 +76,16 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
         <div>
           <div
             className="headerWrapper"
-            style={{
-              background:
-                angebot?.hintergrund == "hell" ? "var(--light)" : "var(--dark)",
-            }}
+            style={
+              angebot?.kategorie == "Seminar"
+                ? blur
+                : angebot?.kategorie == "Ausbildung"
+                  ? dark
+                  : hell
+            }
           >
             <div
               className="slideWrapper"
-              style={{
-                color:
-                  angebot?.hintergrund == "hell"
-                    ? "var(--dark)"
-                    : "var(--light)",
-              }}
             >
               <h2 className="singleCategory">
                 {angebot?.kategorie}{" "}
@@ -88,12 +93,6 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
               </h2>
               <h1
                 className="singleHeadline"
-                style={{
-                  color:
-                    angebot?.hintergrund == "hell"
-                      ? "var(--dark)"
-                      : "var(--light)",
-                }}
               >
                 {angebot.title}
               </h1>

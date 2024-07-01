@@ -94,20 +94,20 @@ export default defineType({
       ],
     },
 
-    {
-      name: "angebote",
-      title: "Angebote Preview",
-      type: "array",
-      of: [
-        {
-          name: "angebot",
-          title: "Angebot",
-          type: "reference",
-          to: [{ type: "angebote" }],
-        },
-      ],
-      validation: (Rule) => Rule.max(3),
-    },
+    // {
+    //   name: "angebote",
+    //   title: "Angebote Preview",
+    //   type: "array",
+    //   of: [
+    //     {
+    //       name: "angebot",
+    //       title: "Angebot",
+    //       type: "reference",
+    //       to: [{ type: "angebote" }],
+    //     },
+    //   ],
+    //   validation: (Rule) => Rule.max(3),
+    // },
 
     {
       name: "about",

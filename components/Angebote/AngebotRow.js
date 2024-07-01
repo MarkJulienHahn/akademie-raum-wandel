@@ -94,7 +94,7 @@ const AngebotRow = ({ angebot }) => {
 
         <div className="buttonRow">
           <Button
-            value="Mehr erfahren"
+            value="Jetzt buchen"
             href={`angebote/${angebot?.slug?.current}`}
           />
         </div>

@@ -76,7 +76,7 @@ export default async function Footer() {
               </Link>
             </li>
           </ul>
-        </div>{" "}
+        </div>
       </div>
       <div className="footerCenter">
         <p>©{new Date().getFullYear()} Akademie für Raum und Wandel</p>

@@ -34,7 +34,6 @@ export default defineType({
       name: "kategorie",
       title: "Kategorie",
       type: "string",
-      // of: [{ type: "string" }],
       options: {
         list: [
           { title: "Seminar", value: "Seminar" },
@@ -147,22 +146,45 @@ export default defineType({
       name: "preisAufzeichnung",
       title: "Preis Aufzeichnung",
       type: "number",
-      validation: (Rule) => Rule.required().min(0).precision(2),
-      options: {
-        precision: 2,
-      },
       hidden: ({ document }) => !document?.aufzeichnung,
+      validation: (Rule) =>
+        Rule.custom((field, context) => {
+          return context.document.aufzeichnung
+            ? field
+              ? true
+              : "Preis Aufzeichnung ist erforderlich, wenn Aufzeichnung aktiv ist."
+            : true;
+        }),
     },
 
     {
       name: "aufzeichnungsLink",
-      title: "Aufzeichnungslink",
+      title: "Vimeo Video-ID",
       type: "string",
-      validation: (Rule) => Rule.required().min(0).precision(2),
-      options: {
-        precision: 2,
-      },
       hidden: ({ document }) => !document?.aufzeichnung,
+      validation: (Rule) =>
+        Rule.custom((field, context) => {
+          return context.document.aufzeichnung
+            ? field
+              ? true
+              : "Aufzeichnungslink ist erforderlich, wenn Aufzeichnung aktiv ist."
+            : true;
+        }),
+    },
+
+    {
+      name: "password",
+      title: "Passwort",
+      type: "string",
+      hidden: ({ document }) => !document?.aufzeichnung,
+      validation: (Rule) =>
+        Rule.custom((field, context) => {
+          return context.document.aufzeichnung
+            ? field
+              ? true
+              : "Passwort ist erforderlich, wenn Aufzeichnung aktiv ist."
+            : true;
+        }),
     },
 
     {

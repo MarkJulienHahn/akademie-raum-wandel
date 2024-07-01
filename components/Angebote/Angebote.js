@@ -46,17 +46,20 @@ const Angebote = ({ angebote, personen }) => {
         angebote={angebote}
         className={shouldFadeIn ? "" : "fade-in"}
       />
-      {angeboteFiltered.map((angebot, i) => (
-        <div key={i}>
-          <AngebotKachel angebot={angebot} />
-        </div>
-      ))}
 
-      {!angeboteFiltered.length && (
-        <h2 style={{ textAlign: "center", width: "100%" }}>
-          In dieser Konfiguration gibt es leider keine Angebote.
-        </h2>
-      )}
+      <div className="angeboteKachelnWrapper">
+        {angeboteFiltered.map((angebot, i) => (
+          <div key={i}>
+            <AngebotKachel angebot={angebot} />
+          </div>
+        ))}
+
+        {!angeboteFiltered.length && (
+          <h2 style={{ textAlign: "center", width: "100%" }}>
+            In dieser Konfiguration gibt es leider keine Angebote.
+          </h2>
+        )}
+      </div>
 
       {angeboteFiltered.length ? (
         <h3 className="vergangenHeadline">Vergangene Angebote</h3>
