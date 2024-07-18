@@ -42,64 +42,69 @@ const AngebotRow = ({ angebot }) => {
   const latestDate = getLatestDate(angebot.termine);
   const inTheFuture = latestDate > today;
 
-  return (
-    inTheFuture && (
-      <div className="angebotRow">
-        <div className="katRow">
-          <p>{angebot?.kategorie}</p>
-          {angebot?.kammer && (
-            <div className="kammer kammerRow">
-              Kammer-
-              <br />
-              anrechnung
-            </div>
-          )}
-        </div>
-        <div className="discRow">
-          <Link href={`angebote/${angebot?.slug?.current}`}>
-            <h1 className="rowHeadline">{angebot?.title}</h1>
-            <h1 className="rowHeadline rowHeadlineBottom">
-              {angebot?.subtitle}
-            </h1>
-          </Link>
-          <PortableText value={angebot.descriptionShort} />
-        </div>
-        <div className="datesRow">
-          <div className="dateRow dates">
-            <div>
-              {formatDateDE(angebot?.termine[0].date)}{" "}
-              {angebot?.termine.length > 1 && "—"}
-            </div>
-            <div>
-              {angebot?.termine.length > 1 &&
-                `${formatDateDE(angebot?.termine[angebot?.termine.length - 1]?.date)}`}
-            </div>
-          </div>{" "}
-          <div className="persRow">
-            {angebot?.personen.map((person, i) => (
-              <div key={i}>{person.name}</div>
-            ))}
+  return inTheFuture | (angebot.kategorie == "Webinar") ? (
+    <div className="angebotRow">
+      <div className="katRow">
+        <p>{angebot?.kategorie}</p>
+        {angebot?.kammer && (
+          <div className="kammer kammerRow">
+            Kammer-
+            <br />
+            anrechnung
           </div>
-          <div className="disclaimer disclaimerRow">
-            <p>
-              <span className="termine">
-                {numbersDE[angebot?.termine.length]}
-              </span>
-              {angebot?.zoom && " per Zoom"}{" "}
-              {angebot?.aufzeichnung &&
-                " mit danach versendeter Aufzeichnung für zeitliche Flexibilität."}
-            </p>
+        )}
+      </div>
+      <div className="discRow">
+        <Link href={`angebote/${angebot?.slug?.current}`}>
+          <h1 className="rowHeadline">{angebot?.title}</h1>
+          <h1 className="rowHeadline rowHeadlineBottom">{angebot?.subtitle}</h1>
+        </Link>
+        <PortableText value={angebot.descriptionShort} />
+      </div>
+      <div className="datesRow">
+        <div className="dateRow dates">
+          <div>
+            {angebot.kategorie !== "Webinar" ? (
+              <>
+                {formatDateDE(angebot?.termine[0].date)}
+                {angebot?.termine.length > 1 && "—"}
+              </>
+            ) : (
+              "Jederzeit verfügbar"
+            )}
+          </div>
+          <div>
+            {angebot?.termine?.length > 1 &&
+              `${formatDateDE(angebot?.termine[angebot?.termine?.length - 1]?.date)}`}
           </div>
         </div>
-
-        <div className="buttonRow">
-          <Button
-            value="Jetzt buchen"
-            href={`angebote/${angebot?.slug?.current}`}
-          />
+        <div className="persRow">
+          {angebot?.personen?.map((person, i) => (
+            <div key={i}>{person.name}</div>
+          ))}
+        </div>
+        <div className="disclaimer disclaimerRow">
+          <p>
+            <span className="termine">
+              {numbersDE[angebot?.termine?.length]}
+            </span>
+            {angebot?.zoom && angebot.kategorie !== "Webinar" && " per Zoom"}
+            {angebot?.aufzeichnung &&
+              angebot.kategorie !== "Webinar" &&
+              " mit danach versendeter Aufzeichnung für zeitliche Flexibilität."}
+          </p>
         </div>
       </div>
-    )
+
+      <div className="buttonRow">
+        <Button
+          value="Jetzt buchen"
+          internal={`angebote/${angebot?.slug?.current}`}
+        />
+      </div>
+    </div>
+  ) : (
+    ""
   );
 };
 

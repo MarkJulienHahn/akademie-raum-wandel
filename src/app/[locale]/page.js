@@ -9,6 +9,7 @@ import Angebote from "../../../components/Home/Angebote";
 import About from "../../../components/Home/About";
 import Personen from "../../../components/Home/Personen";
 import Prefooter from "../../../components/Prefooter/Prefooter";
+import Newsletter from "../../../components/Newsletter";
 
 export default async function Home({ params: { locale } }) {
   const home = await getHome();
@@ -16,6 +17,7 @@ export default async function Home({ params: { locale } }) {
   const prefooter = await getPrefooter();
   return (
     <main>
+      <Newsletter />
       <Header content={home[0].header} locale={locale} />
       <div className="homeSpacer"></div>
       <div className="homeBody">

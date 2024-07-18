@@ -19,7 +19,6 @@ export default async function page() {
         style={{ background: "var(--light)", paddingBottom: "var(--space-XL)" }}
       >
         <Prefooter content={prefooter[0].dozierende} />
-        <Prefooter content={prefooter[0].raumhalten} />
       </div>
     </main>
   );

@@ -42,7 +42,8 @@ const AngebotRow = ({ angebot }) => {
   const inTheFuture = latestDate > today;
 
   return (
-    !inTheFuture && (
+    !inTheFuture &&
+    angebot.kategorie !== "Webinar" && (
       <div className="angebotRow vergangen">
         <div className="katRow">
           <p>{angebot?.kategorie}</p>
@@ -56,20 +57,10 @@ const AngebotRow = ({ angebot }) => {
             <div className="dateRow dates">Aufzeichnung verfügbar</div>
           )}
           <div className="persRow">
-            {angebot?.personen.map((person, i) => (
+            {angebot?.personen?.map((person, i) => (
               <div key={i}>{person.name}</div>
             ))}
           </div>
-          {/* <div className="disclaimer disclaimerRow">
-            <p>
-              <span className="termine">
-                {numbersDE[angebot?.termine.length]}
-              </span>
-              {angebot?.zoom && " per Zoom"}{" "}
-              {angebot?.aufzeichnung &&
-                " mit danach versendeter Aufzeichnung für zeitliche Flexibilität."}
-            </p>
-          </div> */}
         </div>
 
         <div className="buttonRow">
@@ -78,13 +69,13 @@ const AngebotRow = ({ angebot }) => {
               value="Jetzt laden"
               light={true}
               border={true}
-              href={`angebote/${angebot?.slug?.current}`}
+              internal={`angebote/${angebot?.slug?.current}`}
             />
           ) : (
             <Button
               value="Mehr Infos"
               border={true}
-              href={`angebote/${angebot?.slug?.current}`}
+              internal={`angebote/${angebot?.slug?.current}`}
             />
           )}
         </div>

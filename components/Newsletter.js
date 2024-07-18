@@ -2,7 +2,7 @@ import React from "react";
 import { getFooter } from "../sanity/sanity-utils";
 import NewsletterPopup from "./NewsletterPopup";
 
-const NewsletterContent = async () => {
+const Newsletter = async () => {
   const footer = await getFooter();
   return (
     <div>
@@ -11,4 +11,4 @@ const NewsletterContent = async () => {
   );
 };
 
-export default NewsletterContent;
+export default Newsletter;

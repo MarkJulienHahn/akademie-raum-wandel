@@ -3,7 +3,7 @@ import PageTransitionEffect from "./PageTransitionEffect";
 import Nav from "../../../components/Nav/Nav";
 import NavMobile from "../../../components/Nav/NavMobile";
 import Footer from "../../../components/Footer/Footer";
-import NewsletterContent from "../../../components/NewsletterContent";
+
 
 import Head from "next/head";
 
@@ -47,7 +47,7 @@ export default function LocaleLayout({ children, params: { locale } }) {
           <NavMobile locale={locale} />
         </div>
 
-        <NewsletterContent />
+
         <PageTransitionEffect>
           {children}
           <Footer />

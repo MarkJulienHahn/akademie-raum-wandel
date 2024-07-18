@@ -14,14 +14,14 @@ export default async function page() {
             </a>
           </span>
         </div>
-        <div>
-          <span className="kontaktColumnLeft">Telefon</span>
-          <span>{contact[0]?.contact?.telephone}</span>
-        </div>
       </div>
       <div>
         <div>
           <span className="kontaktColumnLeft">Adresse</span>
+          <span>{contact[0]?.address?.name}</span>
+        </div>
+        <div>
+          <span className="kontaktColumnLeft hideMobile"></span>
           <span>{contact[0]?.address?.street}</span>
         </div>
         <div >

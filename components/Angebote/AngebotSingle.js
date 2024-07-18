@@ -153,12 +153,12 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
                 {angebot?.aufzeichnung && !inTheFuture ? (
                   <Button
                     value={"Jetzt Aufzeichnung runterladen"}
-                    href={angebot?.aufzeichnungsLink}
+                    internal={angebot?.aufzeichnungsLink}
                   />
                 ) : !angebot?.aufzeichnung && !inTheFuture ? (
                   ""
                 ) : (
-                  <Button value={"Jetzt buchen"} href={angebot?.buchungsLink} />
+                  <Button value={"Jetzt buchen"} internal={angebot?.buchungsLink} />
                 )}
               </div>
             </div>

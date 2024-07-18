@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import { PortableText } from "next-sanity";
 import Button from "../Button";
 
@@ -30,11 +31,18 @@ const numbersDE = {
 const AngebotKachel = ({ angebot, locale }) => {
   const dark = { background: "var(--dark)", color: "var(--light)" };
   const hell = { background: "var(--light)", color: "var(--dark)" };
-  const blur = {
+  const blurDark = {
     backgroundSize: "cover",
     backgroundImage: `url(${angebot?.blurImageUrl})`,
     color: "var(--light)",
   };
+  const blurLight = {
+    backgroundSize: "cover",
+    backgroundImage: `url(${angebot?.blurImageUrl})`,
+    color: "var(--dark)",
+  };
+
+  const [style, setStyle] = useState(dark);
 
   const getLatestDate = (termine) =>
     termine?.reduce(
@@ -47,74 +55,78 @@ const AngebotKachel = ({ angebot, locale }) => {
   const latestDate = getLatestDate(angebot.termine);
   const inTheFuture = latestDate > today;
 
-  return (
-    inTheFuture && (
+  useEffect(() => {
+    if (angebot.hintergrund == "dark") setStyle(dark);
+    if (angebot.hintergrund == "hell") setStyle(hell);
+    if (angebot.hintergrund == "blurDark") setStyle(blurDark);
+    if (angebot.hintergrund == "blurLight") setStyle(blurLight);
+  }, []);
+
+  return inTheFuture | (angebot.kategorie == "Webinar") ? (
+    <div style={style} className="kachelWrapper">
+      <div className="kachelHeadline">
+        <h2>{angebot?.kategorie}</h2>
+
+        <h1>{angebot?.title}</h1>
+
+        <h2 className="kachelSubhead">
+          {angebot?.subtitle && angebot?.subtitle}
+        </h2>
+      </div>
       <div
-        style={
-          angebot?.kategorie == "Seminar"
-            ? blur
-            : angebot?.kategorie == "Ausbildung"
-              ? dark
-              : hell
-        }
-        className="kachelWrapper"
+        style={{
+          height: "50%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+        }}
       >
-        <div style={{ height: "50%" }}>
-          <h2>{angebot?.kategorie}</h2>
-
-          <h1>{angebot?.title}</h1>
+        <div className="kachelDescr">
+          <PortableText value={angebot.descriptionShort} />
         </div>
-        <div
-          style={{
-            height: "50%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end",
-          }}
-        >
-          {angebot?.subtitle && (
-            <h2 className="kachelSubhead">{angebot?.subtitle}</h2>
-          )}
-          <div className="kachelDescr">
-            <PortableText value={angebot.descriptionShort} />
+        <div className="dateKachel">
+          <div className="dates">
+            {angebot.kategorie !== "Webinar" &&
+              formatDateDE(angebot?.termine[0]?.date)}
+            {angebot?.termine?.length > 1 &&
+              `— ${formatDateDE(angebot?.termine[angebot?.termine?.length - 1]?.date)}`}
           </div>
-          <div className="dateKachel">
-            <div className="dates">
-              {formatDateDE(angebot?.termine[0].date)}{" "}
-              {angebot?.termine.length > 1 &&
-                `— ${formatDateDE(angebot?.termine[angebot?.termine.length - 1]?.date)}`}
+
+          {angebot?.kammer && (
+            <div className="kammer">
+              Kammer-
+              <br />
+              anrechnung
             </div>
+          )}
+        </div>
 
-            {angebot?.kammer && (
-              <div className="kammer">
-                Kammer-
-                <br />
-                anrechnung
-              </div>
-            )}
-          </div>
+        <div className="disclaimer">
+          <p>
+            <span className="termine">
+              {numbersDE[angebot?.termine?.length]}
+            </span>
+            {angebot?.zoom && " per Zoom"}{" "}
+            {angebot?.aufzeichnung &&
+              " mit danach versendeter Aufzeichnung für zeitliche Flexibilität."}
+          </p>
+        </div>
 
-          <div className="disclaimer">
-            <p>
-              <span className="termine">
-                {numbersDE[angebot?.termine.length]}
-              </span>
-              {angebot?.zoom && " per Zoom"}{" "}
-              {angebot?.aufzeichnung &&
-                " mit danach versendeter Aufzeichnung für zeitliche Flexibilität."}
-            </p>
-          </div>
-
-          <div className="angebotButtonWrapper">
-            <Button
-              value={"Jetzt buchen"}
-              light={angebot?.kategorie == "Workshop" ? false : true}
-              href={`angebote/${angebot?.slug?.current}`}
-            />
-          </div>
+        <div className="angebotButtonWrapper">
+          <Button
+            value={"Jetzt buchen"}
+            light={
+              angebot.hintergrund == "dark" || angebot.hintergrund == "blurDark"
+                ? true
+                : false
+            }
+            internal={`angebote/${angebot?.slug?.current}`}
+          />
         </div>
       </div>
-    )
+    </div>
+  ) : (
+    ""
   );
 };
 

@@ -41,13 +41,13 @@ const Filter = ({ setAngeboteFiltered, personen, angebote, className }) => {
 
     if (filterCategory) {
       filteredAngebote = filteredAngebote.filter((angebot) =>
-        angebot.kategorie.includes(filterCategory)
+        angebot.kategorie?.includes(filterCategory)
       );
     }
 
     if (filterDozierende) {
       filteredAngebote = filteredAngebote.filter((angebot) =>
-        angebot.personen.some((person) => person.name === filterDozierende)
+        angebot.personen?.some((person) => person.name === filterDozierende)
       );
     }
 
@@ -61,7 +61,7 @@ const Filter = ({ setAngeboteFiltered, personen, angebote, className }) => {
 
   return (
     <div className={`filter ${className}`}>
-      Filter
+      <span className="filterHeadline">Filter</span>
       <div className="filterButtons">
         <FilterButton
           value="Kammeranrechnungsfähig"
@@ -70,10 +70,7 @@ const Filter = ({ setAngeboteFiltered, personen, angebote, className }) => {
         />
 
         {!filterCategory ? (
-          <div
-            className="filterButtonsColumn"
-            // style={{ width: "111px" }}
-          >
+          <div className="filterButtonsColumn hideMobile">
             <FilterButton value="Formate" fct={handleShowCategories} />
 
             {showCategories && (
@@ -99,6 +96,11 @@ const Filter = ({ setAngeboteFiltered, personen, angebote, className }) => {
                   active={filterCategory === "Ausbildung"}
                   fct={() => handleFilterCategory("Ausbildung")}
                 />
+                <FilterButton
+                  value="Webinar"
+                  active={filterCategory === "Webinar"}
+                  fct={() => handleFilterCategory("Webinar")}
+                />
               </div>
             )}
           </div>
@@ -111,7 +113,7 @@ const Filter = ({ setAngeboteFiltered, personen, angebote, className }) => {
         )}
         {!filterDozierende ? (
           <div
-            className="filterButtonsColumn"
+            className="filterButtonsColumn hideMobile"
             // style={{ width: "120px" }}
           >
             <FilterButton value="Dozierende" fct={handleShowPerson} />

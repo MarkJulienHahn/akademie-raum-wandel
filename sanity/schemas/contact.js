@@ -15,11 +15,6 @@ export default defineType({
           title: "Email",
           type: "string",
         },
-        {
-          name: "telephone",
-          title: "Telephone",
-          type: "string",
-        },
       ],
     },
 
@@ -28,6 +23,11 @@ export default defineType({
       title: "Address",
       type: "object",
       fields: [
+        {
+          name: "name",
+          title: "Name",
+          type: "string",
+        },
         {
           name: "street",
           title: "Straße, Hausnummer",

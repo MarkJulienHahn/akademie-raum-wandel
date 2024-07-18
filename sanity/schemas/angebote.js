@@ -10,22 +10,30 @@ export default defineType({
       name: "title",
       title: "Title",
       type: "string",
+      validation: (Rule) => Rule.required().min(5).max(30),
+      description: "Maximal 30 Zeichen.",
     },
     {
       name: "titleEn",
       title: "TitleEN",
       type: "string",
+      validation: (Rule) => Rule.min(5).max(30),
+      description: "Maximal 30 Zeichen.",
     },
 
     {
       name: "subtitle",
       title: "Untertitel",
       type: "string",
+      validation: (Rule) => Rule.min(10).max(100),
+      description: "Maximal 100 Zeichen.",
     },
     {
       name: "subtitleEn",
       title: "UntertitelEN",
       type: "string",
+      validation: (Rule) => Rule.min(10).max(100),
+      description: "Maximal 100 Zeichen.",
     },
 
     { name: "kammer", title: "Kammeranrechnungsfähig", type: "boolean" },
@@ -34,11 +42,13 @@ export default defineType({
       name: "kategorie",
       title: "Kategorie",
       type: "string",
+      validation: (Rule) => Rule.required(),
       options: {
         list: [
           { title: "Seminar", value: "Seminar" },
           { title: "Workshop", value: "Workshop" },
           { title: "Ausbildung", value: "Ausbildung" },
+          { title: "Webinar", value: "Webinar" },
         ],
         layout: "checkbox",
       },
@@ -76,9 +86,48 @@ export default defineType({
     },
 
     {
+      name: "aufzeichnungsLink",
+      title: "Vimeo Video-ID",
+      type: "string",
+      hidden: ({ document }) => document?.kategorie !== "Webinar",
+      validation: (Rule) =>
+        Rule.custom((field, context) => {
+          return context.document.kategorie === "Webinar"
+            ? field
+              ? true
+              : "Vimeo Video-ID ist erforderlich, wenn Kategorie Webinar ist."
+            : true;
+        }),
+    },
+
+    {
+      name: "password",
+      title: "Vimeo Passwort",
+      type: "string",
+      hidden: ({ document }) => document?.kategorie !== "Webinar",
+      validation: (Rule) =>
+        Rule.custom((field, context) => {
+          return context.document.kategorie === "Webinar"
+            ? field
+              ? true
+              : "Vimeo Video-ID ist erforderlich, wenn Kategorie Webinar ist."
+            : true;
+        }),
+    },
+
+    {
       name: "termine",
       title: "Termine",
       type: "array",
+      hidden: ({ document }) => document?.kategorie == "Webinar",
+      validation: (Rule) =>
+        Rule.custom((field, context) => {
+          return !context.document.kategorie === "Webinar"
+            ? field
+              ? true
+              : "Termin ist erforderlich"
+            : true;
+        }),
       of: [
         {
           name: "termin",
@@ -132,59 +181,17 @@ export default defineType({
       name: "aufzeichnung",
       title: "Aufzeichnung?",
       type: "boolean",
+      hidden: ({ document }) => document?.kategorie == "Webinar",
     },
 
     {
       name: "zoom",
       title: "Per Zoom?",
       type: "boolean",
+      hidden: ({ document }) => document?.kategorie == "Webinar",
       options: {
         default: true,
       },
-    },
-    {
-      name: "preisAufzeichnung",
-      title: "Preis Aufzeichnung",
-      type: "number",
-      hidden: ({ document }) => !document?.aufzeichnung,
-      validation: (Rule) =>
-        Rule.custom((field, context) => {
-          return context.document.aufzeichnung
-            ? field
-              ? true
-              : "Preis Aufzeichnung ist erforderlich, wenn Aufzeichnung aktiv ist."
-            : true;
-        }),
-    },
-
-    {
-      name: "aufzeichnungsLink",
-      title: "Vimeo Video-ID",
-      type: "string",
-      hidden: ({ document }) => !document?.aufzeichnung,
-      validation: (Rule) =>
-        Rule.custom((field, context) => {
-          return context.document.aufzeichnung
-            ? field
-              ? true
-              : "Aufzeichnungslink ist erforderlich, wenn Aufzeichnung aktiv ist."
-            : true;
-        }),
-    },
-
-    {
-      name: "password",
-      title: "Passwort",
-      type: "string",
-      hidden: ({ document }) => !document?.aufzeichnung,
-      validation: (Rule) =>
-        Rule.custom((field, context) => {
-          return context.document.aufzeichnung
-            ? field
-              ? true
-              : "Passwort ist erforderlich, wenn Aufzeichnung aktiv ist."
-            : true;
-        }),
     },
 
     {
@@ -201,6 +208,7 @@ export default defineType({
           },
         },
       ],
+      description: "Maximale Zeichenanzahl 550 Zeichen.",
     },
     {
       name: "descriptionShortEn",
@@ -216,6 +224,7 @@ export default defineType({
           },
         },
       ],
+      description: "Maximale Zeichenanzahl 550 Zeichen.",
     },
 
     {
@@ -249,23 +258,24 @@ export default defineType({
       ],
     },
 
-    // {
-    //   name: "hintergrund",
-    //   title: "Hintergrund",
-    //   type: "string",
-    //   validation: (Rule) =>
-    //     Rule.required().warning(
-    //       "Bitte eine Auswahl für den Hintergrund treffen"
-    //     ),
-    //   options: {
-    //     list: [
-    //       { title: "Dunkel", value: "dunkel" },
-    //       { title: "Hell", value: "hell" },
-    //       { title: "Blur", value: "blur" },
-    //     ],
-    //     layout: "radio",
-    //   },
-    // },
+    {
+      name: "hintergrund",
+      title: "Hintergrund",
+      type: "string",
+      validation: (Rule) =>
+        Rule.required().warning(
+          "Bitte eine Auswahl für den Hintergrund treffen"
+        ),
+      options: {
+        list: [
+          { title: "Dunkel", value: "dark" },
+          { title: "Hell", value: "hell" },
+          { title: "Dunkler Blur", value: "blurDark" },
+          { title: "Heller Blur", value: "blurLight" },
+        ],
+        layout: "radio",
+      },
+    },
 
     {
       name: "blurImage",
@@ -273,13 +283,20 @@ export default defineType({
       type: "image",
       validation: (Rule) =>
         Rule.custom((value, context) => {
-          const { kategorie } = context.document;
-          if (kategorie == "Seminar" && !value) {
-            return "Blur Image is required when Kategorie is Seminar";
+          const { hintergrund } = context.document;
+          if (
+            (hintergrund === "blurDark" || hintergrund === "blurLight") &&
+            !value
+          ) {
+            return "Bitte ein Blur-Image auswählen";
           }
           return true;
         }),
-      hidden: ({ document }) => document?.kategorie !== "Seminar",
+      hidden: ({ document }) =>
+        !(
+          document?.hintergrund === "blurDark" ||
+          document?.hintergrund === "blurLight"
+        ),
     },
 
     {

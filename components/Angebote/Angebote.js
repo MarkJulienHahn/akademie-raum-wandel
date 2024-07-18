@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 
 import AngebotKachel from "./AngebotKachel";
-import AngebotRowVergangen from "./AngebotRowVergangen";
+import AngebotKachelVergangen from "./AngebotKachelVergangen";
 import Filter from "./Filter";
 
 const Angebote = ({ angebote, personen }) => {
@@ -66,10 +66,10 @@ const Angebote = ({ angebote, personen }) => {
       ) : (
         ""
       )}
-      <div className="vergangen">
+      <div className="angeboteKachelnWrapper">
         {angeboteFiltered.map((angebot, i) => (
           <div key={i}>
-            <AngebotRowVergangen angebot={angebot} />
+            <AngebotKachelVergangen angebot={angebot} />
           </div>
         ))}
       </div>
