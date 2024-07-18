@@ -10,7 +10,7 @@ const Angebote = ({ content, locale }) => {
   const today = new Date();
 
   const futureContent = content.filter((entry) =>
-    entry.termine.some((termin) => new Date(termin.date) > today)
+    entry.termine?.some((termin) => new Date(termin.date) > today)
   );
 
   const swiperRefDesktop = useRef(null);

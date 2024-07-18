@@ -32,7 +32,7 @@ const AngebotRow = ({ angebot }) => {
     `${value.toFixed(2).replace(".", ",")} €`;
 
   const getLatestDate = (termine) =>
-    termine.reduce(
+    termine?.reduce(
       (latest, termin) =>
         new Date(termin.date) > latest ? new Date(termin.date) : latest,
       new Date(termine[0].date)

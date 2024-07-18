@@ -13,7 +13,7 @@ const Button = ({ value, href, light, border, file, internal }) => {
       </div>
     </a>
   ) : (
-    <Link href={`/${internal}`} scroll="false">
+    <Link href={`/${internal}`} scroll={false}>
       <div
         className={`button ${light ? "buttonLight" : "buttonDark"} ${border && "buttonBorder"} `}
       >
