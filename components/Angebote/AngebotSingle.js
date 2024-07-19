@@ -63,8 +63,6 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
     color: "var(--light)",
   };
 
-  console.log("future:", inTheFuture, latestDate);
-
   return (
     <AnimatePresence mode="popLayout">
       <motion.div
