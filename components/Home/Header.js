@@ -30,35 +30,44 @@ const Header = ({ content }) => {
       <Swiper
         modules={[EffectFade, Autoplay]}
         effect="fade"
-        spaceBetween={30}
         slidesPerView={1}
-        // fadeEffect={{ crossFade: true }}
-        autoplay={{ delay: 2000, disableOnInteraction: false }}
+        autoplay={{
+          delay: 200,
+          disableOnInteraction: false,
+        }}
+        loop={true}
         speed={5000}
       >
         {content.introSlider.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="slideWrapper">
-              <Image src={slide.asset.url} fill objectFit="cover" alt={`slide-${index}`} />
+              <Image
+                src={slide.asset.url}
+                fill
+                style={{ objectFit: "cover" }}
+                alt={`slide-${index}`}
+              />
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className={`headerContent ${scrollY > 200 ? "fadeOut" : ""}`}>
-        <div
-          style={{
-            transform: `translateY(${-scrollY / 4}px)`,
-            opacity: 1 - scrollY / 200,
-          }}
-        >
-          <h1>
-            <PortableText value={content?.headline} />
-          </h1>
-          <PortableText value={content?.text} />
+      <div className="headerContentWrapper">
+        <div className={`headerContent ${scrollY > 200 ? "fadeOut" : ""}`}>
+          <div
+            style={{
+              transform: `translateY(${-scrollY / 4}px)`,
+              opacity: 1 - scrollY / 200,
+            }}
+          >
+            <h1>
+              <PortableText value={content?.headline} />
+            </h1>
+            <PortableText value={content?.text} />
 
-          <div className="headerButtonsWrapper">
-            <Button value={"Kalender"} internal={"kalender"} />
-            <Button value={"Angebote"} internal={"angebote"} light={true} />
+            <div className="headerButtonsWrapper">
+              <Button value={"Kalender"} internal={"kalender"} />
+              <Button value={"Angebote"} internal={"angebote"} light={true} />
+            </div>
           </div>
         </div>
       </div>

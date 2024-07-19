@@ -45,12 +45,12 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
   const key = usePathname();
 
   const getLatestDate = (termine) =>
+    termine &&
     termine.reduce(
       (latest, termin) =>
         new Date(termin.date) > latest ? new Date(termin.date) : latest,
       new Date(termine[0].date)
     );
-
   const today = new Date();
   const latestDate = getLatestDate(angebot.termine);
   const inTheFuture = latestDate > today;
@@ -62,6 +62,8 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
     backgroundImage: `url(${angebot?.blurImageUrl})`,
     color: "var(--light)",
   };
+
+  console.log("future:", inTheFuture, latestDate);
 
   return (
     <AnimatePresence mode="popLayout">
@@ -84,18 +86,9 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
                   : hell
             }
           >
-            <div
-              className="slideWrapper"
-            >
-              <h2 className="singleCategory">
-                {angebot?.kategorie}{" "}
-                {!inTheFuture && angebot?.aufzeichnung && " (Aufzeichnung)"}
-              </h2>
-              <h1
-                className="singleHeadline"
-              >
-                {angebot.title}
-              </h1>
+            <div className="slideWrapper">
+              <h2 className="singleCategory">{angebot?.kategorie}</h2>
+              <h1 className="singleHeadline">{angebot.title}</h1>
               {angebot?.hintergrund == "blur" && (
                 <Image src={angebot?.blurImageUrl} fill objectFit="cover" />
               )}
@@ -119,34 +112,29 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
                       : angebot.preis + " €"}
                 </div>
 
-                <div
-                  className="singleBodyDates"
-                  style={{
-                    paddingTop:
-                      !inTheFuture && !angebot?.aufzeichnung
-                        ? "0px"
-                        : "var(--space-M)",
-                  }}
-                >
-                  {angebot.termine.map((termin, i) => (
-                    <div key={i}>
-                      {formatDateDE(termin?.date)} / {termin?.start} —{" "}
-                      {termin?.ende} Uhr
-                    </div>
-                  ))}
+                <div className="singleBodyDates">
+                  {inTheFuture &&
+                    angebot.termine.map((termin, i) => (
+                      <div key={i}>
+                        {formatDateDE(termin?.date)} / {termin?.start} —{" "}
+                        {termin?.ende} Uhr
+                      </div>
+                    ))}
                 </div>
                 <div
                   className="disclaimer"
                   style={{ width: "100%", marginTop: "var(--space-S)" }}
                 >
-                  <p>
-                    <span className="termine">
-                      {numbersDE[angebot?.termine.length]}
-                    </span>
-                    {angebot?.zoom && " per Zoom"}{" "}
-                    {angebot?.aufzeichnung &&
-                      " mit danach versendeter Aufzeichnung für zeitliche Flexibilität."}
-                  </p>
+                  {inTheFuture && (
+                    <p>
+                      <span className="termine">
+                        {numbersDE[angebot?.termine.length]}
+                      </span>
+                      {angebot?.zoom && " per Zoom"}{" "}
+                      {angebot?.aufzeichnung &&
+                        " mit danach versendeter Aufzeichnung für zeitliche Flexibilität."}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="singleBodyButton">
@@ -158,7 +146,7 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
                 ) : !angebot?.aufzeichnung && !inTheFuture ? (
                   ""
                 ) : (
-                  <Button value={"Jetzt buchen"} internal={angebot?.buchungsLink} />
+                  <Button value={"Jetzt buchen"} href={angebot?.buchungsLink} />
                 )}
               </div>
             </div>
@@ -166,7 +154,7 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
         </div>
 
         <div className="singlePersons">
-          {angebot?.personen.map((person, i) => (
+          {angebot?.personen?.map((person, i) => (
             <div
               className="singlePerson"
               key={i}

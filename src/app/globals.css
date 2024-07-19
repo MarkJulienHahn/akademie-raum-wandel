@@ -281,10 +281,10 @@ ul {
   position: fixed;
   top: 0;
   z-index: 0;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 .slideWrapper {
@@ -292,7 +292,11 @@ ul {
   height: 100vh;
   position: relative;
 }
-
+.headerContentWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .headerContent {
   color: var(--light);
   position: absolute;
@@ -1214,7 +1218,7 @@ ul {
   text-align: center;
   transform: translateX(150%);
   animation: swipeIn 0.5s ease;
-  animation-delay: 15s;
+  animation-delay: 25s;
   animation-fill-mode: forwards;
   transition: opacity 0.5s ease;
 }
@@ -1237,6 +1241,15 @@ ul {
   }
   100% {
     transform: translateX(0%);
+  }
+}
+
+@keyframes swipeUp {
+  0% {
+    transform: translateY(150%);
+  }
+  100% {
+    transform: translateY(0%);
   }
 }
 
@@ -1268,6 +1281,43 @@ ul {
 }
 .swiper-slide-prev {
   cursor: w-resize;
+}
+
+.buyNowPopupWrapper {
+  position: fixed;
+  bottom: var(--space-S);
+  left: calc(50vw - (230px));
+  padding: var(--space-S) 30px 28px 30px;
+  width: 459px;
+  color: var(--dark);
+  background: var(--yellow);
+  z-index: 10000;
+  border-radius: 15px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  text-align: center;
+  transform: translateY(150%);
+  animation: swipeUp 0.5s ease;
+  animation-delay: 20s;
+  animation-fill-mode: forwards;
+  transition: opacity 0.5s ease;
+}
+
+.buyHeadline {
+  margin-bottom: var(--space-S)
+}
+
+.buyHeadline h1 {
+  margin-bottom: var(--space-S)
+}
+
+.buyHeadline h2 {
+  padding-left: 10px;
+  margin-bottom: var(--space-XS)
+}
+
+.buyHeadline p {
+  margin-bottom: var(--space-S)
 }
 
 @media screen and (max-width: 1500px) {
@@ -1481,7 +1531,8 @@ ul {
   .siteMap li {
     margin-left: 0;
   }
-  .newsletterPopupWrapper {
+  .newsletterPopupWrapper,
+  .buyNowPopupWrapper {
     width: calc(100vw - 2 * var(--space-S));
     left: var(--space-S);
     padding: var(--space-M) 10px 18px 15px;
@@ -1599,6 +1650,7 @@ ul {
   .kontaktWrapper {
     height: 75vh;
     font-size: 20pt;
+
     letter-spacing: -0.5px;
   }
   .singleContentSpacer {
