@@ -1298,7 +1298,7 @@ ul {
   text-align: center;
   transform: translateY(150%);
   animation: swipeUp 0.5s ease;
-  animation-delay: 20s;
+  animation-delay: 2s;
   animation-fill-mode: forwards;
   transition: opacity 0.5s ease;
 }

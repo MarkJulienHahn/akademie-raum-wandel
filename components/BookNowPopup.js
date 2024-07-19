@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 
 // Styles for visibility
@@ -37,18 +37,6 @@ const numbersDE = {
 const BookNowPopup = ({ buchungslink, titel, termine, preis }) => {
   const [show, setShow] = useState(true);
 
-  // Retrieve the initial state from session storage on client-side mount
-  useEffect(() => {
-    const initialShowState =
-      sessionStorage.getItem("newsletterShow") !== "false";
-    setShow(initialShowState);
-  }, []);
-
-  // Synchronize the state with session storage
-  useEffect(() => {
-    sessionStorage.setItem("newsletterShow", show);
-  }, [show]);
-
   // Handle click to toggle popup visibility
   const handleClick = () => {
     setShow(!show);
@@ -68,7 +56,7 @@ const BookNowPopup = ({ buchungslink, titel, termine, preis }) => {
   return (
     inTheFuture && (
       <div className="buyNowPopupWrapper" style={show ? visible : inVisible}>
-        <div className="newsletterClose" onClick={handleClick}>
+        <div className="newsletterClose" onClick={() => handleClick()}>
           X
         </div>
         <div className="buyHeadline">
