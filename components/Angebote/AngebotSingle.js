@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -42,6 +43,19 @@ const variants = {
 import Button from "../Button";
 
 const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
+  const dark = { background: "var(--dark)", color: "var(--light)" };
+  const hell = { background: "var(--light)", color: "var(--dark)" };
+  const blurDark = {
+    backgroundSize: "cover",
+    backgroundImage: `url(${angebot?.blurImageUrl})`,
+    color: "var(--light)",
+  };
+  const blurLight = {
+    backgroundSize: "cover",
+    backgroundImage: `url(${angebot?.blurImageUrl})`,
+    color: "var(--dark)",
+  };
+  const [style, setStyle] = useState(dark);
   const key = usePathname();
 
   const getLatestDate = (termine) =>
@@ -55,13 +69,12 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
   const latestDate = getLatestDate(angebot.termine);
   const inTheFuture = latestDate > today;
 
-  const dark = { background: "var(--dark)", color: "var(--light)" };
-  const hell = { background: "var(--light)", color: "var(--dark)" };
-  const blur = {
-    backgroundSize: "cover",
-    backgroundImage: `url(${angebot?.blurImageUrl})`,
-    color: "var(--light)",
-  };
+  useEffect(() => {
+    if (angebot.hintergrund == "dark") setStyle(dark);
+    if (angebot.hintergrund == "hell") setStyle(hell);
+    if (angebot.hintergrund == "blurDark") setStyle(blurDark);
+    if (angebot.hintergrund == "blurLight") setStyle(blurLight);
+  }, []);
 
   return (
     <AnimatePresence mode="popLayout">
@@ -74,16 +87,7 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
         transition={{ ease: "easeInOut", duration: 0.5, delay: 0.2 }}
       >
         <div>
-          <div
-            className="headerWrapper"
-            style={
-              angebot?.kategorie == "Seminar"
-                ? blur
-                : angebot?.kategorie == "Ausbildung"
-                  ? dark
-                  : hell
-            }
-          >
+          <div className="headerWrapper" style={style}>
             <div className="slideWrapper">
               <h2 className="singleCategory">{angebot?.kategorie}</h2>
               <h1 className="singleHeadline">{angebot.title}</h1>
