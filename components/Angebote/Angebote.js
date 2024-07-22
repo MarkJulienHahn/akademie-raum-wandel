@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import AngebotKachel from "./AngebotKachel";
 import AngebotKachelVergangen from "./AngebotKachelVergangen";
@@ -9,6 +9,9 @@ import Filter from "./Filter";
 const Angebote = ({ angebote, personen }) => {
   const [angeboteFiltered, setAngeboteFiltered] = useState(angebote);
   const [shouldFadeIn, setShouldFadeIn] = useState(false);
+  const [vergangeneExist, setVergangeneExist] = useState(null);
+
+  const ref = useRef();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,6 +41,12 @@ const Angebote = ({ angebote, personen }) => {
     };
   }, []);
 
+  useEffect(() => {
+    ref.current.clientHeight == 0
+      ? setVergangeneExist(false)
+      : setVergangeneExist(true);
+  }, []);
+
   return (
     <>
       <Filter
@@ -61,12 +70,13 @@ const Angebote = ({ angebote, personen }) => {
         )}
       </div>
 
-      {angeboteFiltered.length ? (
+      {vergangeneExist ? (
         <h3 className="vergangenHeadline">Vergangene Angebote</h3>
       ) : (
         ""
       )}
-      <div className="angeboteKachelnWrapper">
+
+      <div ref={ref} className="angeboteKachelnWrapper">
         {angeboteFiltered.map((angebot, i) => (
           <div key={i}>
             <AngebotKachelVergangen angebot={angebot} />

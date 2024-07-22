@@ -96,7 +96,6 @@ h1 {
 }
 
 h2 {
-  /* font-family: "MJH-Book"; */
   font-weight: normal;
   font-size: var(--fontSize-M);
   line-height: var(--lineHeight-M);
@@ -111,6 +110,13 @@ h3 {
   letter-spacing: var(--letterSpacing-XS);
 }
 
+h1,
+h2,
+h3 {
+  hyphens: auto;
+  hyphenate-limit-chars: 8 5 5;
+}
+
 strong {
   font-family: "MJH-Bold";
 }
@@ -121,6 +127,10 @@ ul {
 
 ::selection {
   background: var(--yellow);
+}
+
+p + p {
+  margin-top: 20px;
 }
 
 /* NAV */
@@ -204,6 +214,10 @@ ul {
   margin-top: var(--space-S);
   display: flex;
   justify-content: center;
+  opacity: 0;
+  animation: fadeIn 3s ease;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
 }
 
 .buttonBorder {
@@ -304,10 +318,6 @@ ul {
   z-index: 200;
   max-width: 1200px;
   transition: opacity 0.3s ease;
-  opacity: 0;
-  animation: fadeIn 3s ease;
-  animation-fill-mode: forwards;
-  animation-delay: 2s;
 }
 
 .headerContent h1 {
@@ -525,6 +535,8 @@ ul {
 .leisteSection h1 {
   margin: var(--space-S) 0 var(--space-S);
   font-family: "MJH-Regular";
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
 }
 
 /* ANGEBOTE */
@@ -599,7 +611,6 @@ ul {
   hyphens: auto;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  hyphenate-limit-chars: 6 3 3;
   font-size: 70pt;
   line-height: 60pt;
   letter-spacing: -2px;
@@ -656,6 +667,8 @@ ul {
   font-size: var(--fontSize-XS);
   line-height: var(--lineHeight-XS);
   width: 60%;
+  height: 20px;
+  margin-bottom: 30px;
 }
 
 .termine {
@@ -992,7 +1005,7 @@ ul {
 .footerCenter {
   position: absolute;
   left: 0;
-  bottom: var(--space-S);
+  bottom: var(--space-XS);
   width: 100vw;
   text-align: center;
   display: flex;
@@ -1085,6 +1098,7 @@ ul {
   display: block;
   position: absolute;
   right: var(--space-S);
+  border-color: transparent !important;
 }
 
 .singleBodyButton .button {
@@ -1099,7 +1113,6 @@ ul {
 .singleBodyPrice {
   font-size: 80px;
   line-height: 60px;
-  letter-spacing: var(--letterSpacing-XL);
 }
 
 .singleBodyDates {
@@ -1107,6 +1120,7 @@ ul {
   line-height: var(--lineHeight-M);
   letter-spacing: var(--letterSpacing-M);
   padding-top: var(--space-M);
+  text-wrap: nowrap;
 }
 
 .singleHeadline {
@@ -1283,14 +1297,18 @@ ul {
   cursor: w-resize;
 }
 
+.homeAngeboteWrapperTablet {
+  display: none;
+}
+
 .buyNowPopupWrapper {
   position: fixed;
   bottom: var(--space-S);
-  left: calc(50vw - (230px));
+  right: var(--space-S);
   padding: var(--space-S) 30px 28px 30px;
   width: 459px;
   color: var(--dark);
-  background: var(--yellow);
+  background: rgba(122, 255, 96, 0.67);
   z-index: 10000;
   border-radius: 15px;
   backdrop-filter: blur(20px);
@@ -1298,26 +1316,32 @@ ul {
   text-align: center;
   transform: translateY(150%);
   animation: swipeUp 0.5s ease;
-  animation-delay: 20s;
+  animation-delay: 15s;
   animation-fill-mode: forwards;
   transition: opacity 0.5s ease;
 }
 
+.buyNowPopupWrapper p {
+  font-size: var(--fontSize-XS);
+  line-height: var(--lineHeight-XS);
+  letter-spacing: var(--letterSpacing-XS);
+}
+
 .buyHeadline {
-  margin-bottom: var(--space-S)
+  margin-bottom: var(--space-S);
 }
 
 .buyHeadline h1 {
-  margin-bottom: var(--space-S)
+  margin-bottom: var(--space-S);
 }
 
 .buyHeadline h2 {
   padding-left: 10px;
-  margin-bottom: var(--space-XS)
+  margin-bottom: var(--space-S);
 }
 
 .buyHeadline p {
-  margin-bottom: var(--space-S)
+  margin-bottom: var(--space-S);
 }
 
 @media screen and (max-width: 1500px) {
@@ -1347,11 +1371,37 @@ ul {
     margin-bottom: var(--space-S);
     height: 36px;
   }
+  .singleBodyButton .button {
+    font-size: 35px;
+    line-height: 38px;
+    letter-spacing: -0.7px;
+    padding: 7px var(--space-M);
+    border-radius: 50px;
+    border: 3px solid;
+  }
 }
 @media screen and (max-width: 1200px) {
+  :root {
+    --fontSize-L: 35px;
+    --lineHeight-L: 38px;
+    --letterSpacing-L: -0.7px;
+  }
   .kachelWrapper {
     max-width: 45vw;
     padding: var(--space-S);
+  }
+  .homeAngeboteWrapper,
+  .homeAngeboteWrapperMobile {
+    display: none;
+  }
+
+  .homeAngeboteWrapperTablet {
+    display: block;
+    margin-top: var(--space-S);
+  }
+
+  .homeAngeboteWrapperTablet .kachelWrapper {
+    max-width: 100%;
   }
 }
 
@@ -1375,11 +1425,11 @@ ul {
 
     --fontSize-M: 18px;
     --lineHeight-M: 22px;
-    --letterSpacing-M: -0.45px;
+    --letterSpacing-M: -0.25px;
 
     --fontSize-L: 30px;
     --lineHeight-L: 33px;
-    --letterSpacing-L: -1.1px;
+    --letterSpacing-L: 0px;
 
     --fontSize-XL: 80px;
     --lineHeight-XL: 80px;
@@ -1416,6 +1466,9 @@ ul {
     letter-spacing: var(--letterSpacing-L);
     line-height: 40px;
   }
+  .homeAngeboteWrapperTablet {
+    display: none;
+  }
 
   .button,
   .filterButton {
@@ -1450,9 +1503,6 @@ ul {
   }
   .overflowPadding {
     height: 50px;
-  }
-  .homeAngeboteWrapper {
-    display: none;
   }
 
   .homeAngeboteWrapperMobile {
@@ -1698,8 +1748,16 @@ ul {
     hyphens: auto;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    hyphenate-limit-chars: 6 3 3;
+
     width: 100vw;
+  }
+  .homeAngeboteWrapperMobile .kachelWrapper {
+    max-width: unset;
+    width: unset;
+    height: 700px;
+  }
+  .buyHeadline p {
+    margin-bottom: var(--space-M);
   }
 }
 

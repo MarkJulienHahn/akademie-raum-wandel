@@ -2,7 +2,6 @@ import { Link } from "@/navigation";
 import React from "react";
 
 const Button = ({ value, href, light, border, file, internal }) => {
-  console.log(href || file);
 
   return !internal ? (
     <a href={href || file} target="_blank" rel="noreferrer">

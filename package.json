@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sanity/client": "^6.21.1",
     "@sanity/orderable-document-list": "^1.2.1",
     "@sanity/vision": "^3.43.0",
+    "dotenv": "^16.4.5",
     "framer-motion": "^11.2.6",
     "hamburger-react": "^2.5.1",
     "next": "14.2.3",

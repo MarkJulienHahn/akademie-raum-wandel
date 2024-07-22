@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import AngebotRow from "./AngebotRow";
 import AngebotRowVergangen from "./AngebotRowVergangen";
 import Filter from "./Filter";
@@ -8,6 +8,9 @@ import Filter from "./Filter";
 const Kalender = ({ angebote, personen }) => {
   const [angeboteFiltered, setAngeboteFiltered] = useState([]);
   const [shouldFadeIn, setShouldFadeIn] = useState(false);
+  const [vergangeneExist, setVergangeneExist] = useState(null);
+
+  const ref = useRef();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +40,18 @@ const Kalender = ({ angebote, personen }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const checkVergangeneExist = () => {
+      if (ref.current) {
+        setVergangeneExist(ref.current.clientHeight > 0);
+      }
+    };
+
+    checkVergangeneExist();
+  }, [angeboteFiltered]);
+
+  console.log(ref?.current?.clientHeight, vergangeneExist);
+
   return (
     <div>
       <Filter
@@ -50,7 +65,8 @@ const Kalender = ({ angebote, personen }) => {
           <AngebotRow angebot={angebot} />
         </div>
       ))}
-      {angeboteFiltered.length ? (
+
+      {vergangeneExist ? (
         <h3
           className="vergangenHeadline"
           style={{
@@ -64,13 +80,15 @@ const Kalender = ({ angebote, personen }) => {
       ) : (
         ""
       )}
-      <div className="vergangen">
+
+      <div className="vergangen" ref={ref}>
         {angeboteFiltered.map((angebot, i) => (
           <div key={i}>
             <AngebotRowVergangen angebot={angebot} />
           </div>
         ))}
       </div>
+
       {!angeboteFiltered.length && (
         <h2 style={{ textAlign: "center" }}>
           In dieser Konfiguration gibt es leider keine Angebote.

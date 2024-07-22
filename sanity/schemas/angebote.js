@@ -1,5 +1,4 @@
 import { defineType } from "sanity";
-import { orderRankField } from "@sanity/orderable-document-list";
 
 export default defineType({
   name: "angebote",
@@ -52,6 +51,7 @@ export default defineType({
         ],
         layout: "checkbox",
       },
+      initialValue: "Seminar",
     },
 
     {
@@ -316,7 +316,11 @@ export default defineType({
         maxLength: 200,
       },
     },
-
-    orderRankField({ type: "angebote" }),
+    {
+      name: "firstDate",
+      title: "First Date",
+      type: "date",
+      // hidden: true,
+    },
   ],
 });

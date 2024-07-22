@@ -16,12 +16,14 @@ export const myStructure = (S, context) =>
         .id("akademie")
         .child(S.document().schemaType("akademie").documentId("akademie")),
 
-      orderableDocumentListDeskItem({
-        type: "angebote",
-        title: "Angebote",
-        S,
-        context,
-      }),
+        S.listItem()
+        .title("Angebote")
+        .schemaType("angebote")
+        .child(
+          S.documentTypeList("angebote")
+            .title("Angebote")
+            // .defaultOrdering([{ field: "firstDate", direction: "asc" }])
+        ),
 
       orderableDocumentListDeskItem({
         type: "personen",

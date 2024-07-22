@@ -21,7 +21,7 @@ const Personen = ({ content }) => {
         </div>
         <p className="disclaimer">{content?.hinweis}</p>
         <div className="buttonContainer">
-          <Button value={"Über die Dozentinnen"} internal={"personen"} />
+          <Button value={"Zu den Dozent:innen"} internal={"personen"} />
         </div>
       </div>
     </div>

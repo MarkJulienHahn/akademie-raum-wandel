@@ -102,13 +102,9 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
                 <PortableText value={angebot.description} />
               </div>
               <div className="singleBodyData">
-                <div className="singleBodyPrice">
-                  {angebot?.aufzeichnung && !inTheFuture
-                    ? angebot.preisAufzeichnung + " €"
-                    : !angebot?.aufzeichnung && !inTheFuture
-                      ? ""
-                      : angebot.preis + " €"}
-                </div>
+                {(inTheFuture || angebot?.kategorie == "Webinar") && (
+                  <div className="singleBodyPrice">{angebot.preis + " €"}</div>
+                )}
 
                 <div className="singleBodyDates">
                   {inTheFuture &&
@@ -123,7 +119,7 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
                   className="disclaimer"
                   style={{ width: "100%", marginTop: "var(--space-S)" }}
                 >
-                  {inTheFuture && (
+                  {inTheFuture && angebot?.kategorie !== "Webinar" && (
                     <p>
                       <span className="termine">
                         {numbersDE[angebot?.termine.length]}
@@ -133,17 +129,21 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
                         " mit danach versendeter Aufzeichnung für zeitliche Flexibilität."}
                     </p>
                   )}
+                  <p>
+                    Alle Käufe sind final, kein Umtausch oder Erstattung
+                    möglich.
+                  </p>
                 </div>
               </div>
               <div className="singleBodyButton">
-                {angebot?.aufzeichnung && !inTheFuture ? (
+                {angebot?.kategorie == "Webinar" && (
                   <Button
-                    value={"Jetzt Aufzeichnung runterladen"}
+                    value={"Jetzt kaufen"}
                     internal={angebot?.aufzeichnungsLink}
                   />
-                ) : !angebot?.aufzeichnung && !inTheFuture ? (
-                  ""
-                ) : (
+                )}
+
+                {angebot?.kategorie !== "Webinar" && inTheFuture && (
                   <Button value={"Jetzt buchen"} href={angebot?.buchungsLink} />
                 )}
               </div>

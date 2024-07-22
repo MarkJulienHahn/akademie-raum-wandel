@@ -48,23 +48,27 @@ export default async function Footer() {
               </Link>
             </li>
             <li>
-              <Link scroll={false} href="/instagram">
+              <a
+                href="https://www.instagram.com/akademieraumwandel/?hl=de"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Instagram
-              </Link>
+              </a>
             </li>
-            <li>
+            {/* <li>
               <Link scroll={false} href="/newsletter">
                 Newsletter
               </Link>
-            </li>
+            </li> */}
           </ul>
           <ul>
             <li>Informationen</li>
-            <li>
+            {/* <li>
               <Link scroll={false} href="/faq">
                 FAQs
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link scroll={false} href="/impressum">
                 Impressum

@@ -17,6 +17,9 @@ export default async function page(params) {
         titel={angebot[0].title}
         preis={angebot[0].preis}
         termine={angebot[0].termine}
+        zoom={angebot[0].zoom}
+        aufzeichnung={angebot[0].aufzeichnung}
+        kategorie={angebot[0].kategorie}
       />
 
       <AngebotSingle

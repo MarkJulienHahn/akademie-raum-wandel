@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "./Button";
 
 // Styles for visibility
@@ -34,10 +34,17 @@ const numbersDE = {
   20: "Zwanzig Termine",
 };
 
-const BookNowPopup = ({ buchungslink, titel, termine, preis }) => {
+const BookNowPopup = ({
+  buchungslink,
+  titel,
+  termine,
+  preis,
+  zoom,
+  aufzeichnung,
+  kategorie,
+}) => {
   const [show, setShow] = useState(true);
 
-  // Handle click to toggle popup visibility
   const handleClick = () => {
     setShow(!show);
   };
@@ -53,16 +60,27 @@ const BookNowPopup = ({ buchungslink, titel, termine, preis }) => {
   const latestDate = getLatestDate(termine);
   const inTheFuture = latestDate > today;
 
+  useEffect(() => {
+    return () => {
+      setShow(true);
+    };
+  }, []);
+
   return (
-    inTheFuture && (
+    (inTheFuture || kategorie == "Webinar") && (
       <div className="buyNowPopupWrapper" style={show ? visible : inVisible}>
         <div className="newsletterClose" onClick={() => handleClick()}>
           X
         </div>
         <div className="buyHeadline">
           <h1>{titel}</h1>
-          <p>{numbersDE[termine.length]}</p>
           <h2>{preis} €</h2>
+          <p>
+            <span className="termine">{numbersDE[termine?.length]}</span>
+            {zoom && " per Zoom"}
+            {aufzeichnung &&
+              " mit danach versendeter Aufzeichnung für zeitliche Flexibilität."}
+          </p>
         </div>
         <Button value={"Jetzt buchen"} href={buchungslink} />
       </div>

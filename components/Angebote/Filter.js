@@ -69,7 +69,7 @@ const Filter = ({ setAngeboteFiltered, personen, angebote, className }) => {
           fct={handleFilterKammer}
         />
 
-        {!filterCategory ? (
+        {/* {!filterCategory ? (
           <div className="filterButtonsColumn hideMobile">
             <FilterButton value="Formate" fct={handleShowCategories} />
 
@@ -142,7 +142,7 @@ const Filter = ({ setAngeboteFiltered, personen, angebote, className }) => {
             active={true}
             fct={() => handleFilterDozierende("")}
           />
-        )}
+        )} */}
       </div>
     </div>
   );

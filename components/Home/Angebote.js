@@ -14,6 +14,7 @@ const Angebote = ({ content, locale }) => {
   );
 
   const swiperRefDesktop = useRef(null);
+  const swiperRefTablet = useRef(null);
   const swiperRefMobile = useRef(null);
 
   const handleSlideClick = (index, swiperRef) => {
@@ -47,6 +48,30 @@ const Angebote = ({ content, locale }) => {
           )}
         </Swiper>
       </div>
+
+      <div className="homeAngeboteWrapperTablet">
+        <Swiper
+          spaceBetween={1}
+          slidesPerView={2}
+          centeredSlides={true}
+          initialSlide={1}
+          onSwiper={(swiper) => {
+            swiperRefTablet.current = swiper;
+          }}
+        >
+          {futureContent.map(
+            (entry, i) =>
+              i <= 5 && (
+                <SwiperSlide key={i}>
+                  <span onClick={() => handleSlideClick(i, swiperRefTablet)}>
+                    <AngebotKachel angebot={entry} locale={locale} />
+                  </span>
+                </SwiperSlide>
+              )
+          )}
+        </Swiper>
+      </div>
+
       <div className="homeAngeboteWrapperMobile">
         <Swiper
           spaceBetween={1}

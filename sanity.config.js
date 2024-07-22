@@ -1,5 +1,5 @@
 import { defineConfig } from "sanity";
-import { structureTool } from 'sanity/structure';
+import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import schemaTypes from "./sanity/schemas/index";
 import { myStructure } from "./sanity/deskStructure";
@@ -11,10 +11,10 @@ const singletonActions = new Set(["publish", "discardChanges", "restore"]);
 const singletonTypes = new Set(["settings"]);
 
 const config = defineConfig({
-  name: 'default',
-  title: 'Akademie Raum Wandel',
-  projectId: 'pwwuuxcr',
-  dataset: 'production',
+  name: "default",
+  title: "Akademie Raum Wandel",
+  projectId: "pwwuuxcr",
+  dataset: "production",
   apiVersion: "2024-05-29", // Ensure this is the intended API version
   basePath: "/admin",
   plugins: [
@@ -26,7 +26,7 @@ const config = defineConfig({
 
   schema: {
     types: schemaTypes, // Ensure schemaTypes is correctly exported and defined
-    templates: (templates) => 
+    templates: (templates) =>
       templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
   },
   document: {
