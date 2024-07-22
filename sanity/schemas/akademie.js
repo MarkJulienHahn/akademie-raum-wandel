@@ -145,6 +145,14 @@ export default defineType({
         },
       ],
     },
+
+    {
+      title: "SEO Description",
+      name: "seoDescription",
+      type: "text",
+      description:
+        "Dieser Text wird für die Suchmaschinenoptimierung verwendet. Bitte hierzu konventionen zu Länge und Schlagwörtern beachten.",
+    },
   ],
   preview: {
     prepare() {

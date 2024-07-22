@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "generate-sitemap": "node generate-sitemap.js",
     "lint": "next lint"
   },
   "dependencies": {
@@ -21,6 +22,7 @@
     "react": "^18",
     "react-div-100vh": "^0.7.0",
     "react-dom": "^18",
+    "sitemap": "^8.0.0",
     "swiper": "^11.1.4"
   }
 }

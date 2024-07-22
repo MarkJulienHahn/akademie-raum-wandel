@@ -1,0 +1,7 @@
+# Allow all web crawlers full access
+User-agent: *
+Disallow: /admin/        # Disallow crawlers from accessing admin pages
+Allow: /
+
+# Sitemap location
+Sitemap: https://akademieraumwandel.com/sitemap.xml

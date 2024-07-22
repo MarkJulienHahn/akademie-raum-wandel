@@ -21,7 +21,7 @@ export async function getHome() {
 }
 
 export async function getAkademie() {
-  return client.fetch(groq`*[_type == "akademie"]{
+  return client.fetch(groq`*[_type == "akademie"]{...,
     feed[]{...,
       headline,
       background{
@@ -78,7 +78,9 @@ export async function getFAQ() {
 }
 
 export async function getPrefooter() {
-  return client.fetch(groq`*[_type == "prefooter"]{..., "dozierende": dozierende{..., "button": button{...,  "file": file.asset->{url}}},}`);
+  return client.fetch(
+    groq`*[_type == "prefooter"]{..., "dozierende": dozierende{..., "button": button{...,  "file": file.asset->{url}}},}`
+  );
 }
 
 export async function getFooter() {

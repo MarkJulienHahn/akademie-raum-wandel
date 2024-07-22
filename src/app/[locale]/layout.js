@@ -4,15 +4,26 @@ import Nav from "../../../components/Nav/Nav";
 import NavMobile from "../../../components/Nav/NavMobile";
 import Footer from "../../../components/Footer/Footer";
 
-
+import { getAkademie } from "../../../sanity/sanity-utils";
 import Head from "next/head";
 
-export const metadata = {
-  title: "Akademie für Raum und Wandel",
-  description: "Description coming",
-};
+export async function generateMetadata() {
+  const akademie = await getAkademie();
 
-export default function LocaleLayout({ children, params: { locale } }) {
+  return {
+    title: "Akademie für Raum und Wandel",
+    openGraph: {
+      title: "Akademie für Raum und Wandel",
+      description: akademie[0].seoDescription || "",
+      url: "https://akademieraumwandel.com",
+      siteName: "Akademie für Raum und Wandel",
+      locale: "de_DE",
+      type: "website",
+    },
+  };
+}
+
+export default async function LocaleLayout({ children, params: { locale } }) {
   return (
     <html lang={locale}>
       <Head>
@@ -46,7 +57,6 @@ export default function LocaleLayout({ children, params: { locale } }) {
         <div className="navMobile">
           <NavMobile locale={locale} />
         </div>
-
 
         <PageTransitionEffect>
           {children}
