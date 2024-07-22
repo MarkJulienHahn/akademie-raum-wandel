@@ -446,6 +446,10 @@ p + p {
   gap: var(--space-M);
 }
 
+.txtTwoColumn p + p {
+  margin-top: 0;
+}
+
 .sectionWrapper .txtWrapper h2 {
   font-size: 40px;
   letter-spacing: -1.5px;
@@ -663,11 +667,14 @@ p + p {
   margin-top: 10px;
 }
 
+.kachelWrapper .disclaimer {
+  height: 20px;
+}
+
 .disclaimer {
   font-size: var(--fontSize-XS);
   line-height: var(--lineHeight-XS);
   width: 60%;
-  height: 20px;
   margin-bottom: 30px;
 }
 
@@ -1546,6 +1553,7 @@ p + p {
   .txtTwoColumn p {
     padding-bottom: var(--space-S);
   }
+
   .txtWrapper .disclaimer {
     padding-top: var(--space-S);
     font-family: "MJH-Bold";

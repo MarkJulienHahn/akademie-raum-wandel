@@ -6,7 +6,7 @@ import Button from "../Button";
 
 const Personen = ({ content }) => {
   return (
-    <div className="sectionWrapper bgGrey">
+    <div className="sectionWrapper bgGrey" style={{ minHeight: "660px" }}>
       <div className="imgColumn">
         <div className="imgWrapper">
           <Image src={content?.portrait?.asset.url} fill />
