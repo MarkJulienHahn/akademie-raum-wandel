@@ -237,7 +237,7 @@ export default defineType({
           styles: [{ title: "Normal", value: "normal" }],
           lists: [],
           marks: {
-            decorators: [{ title: "Emphasis", value: "em" }],
+            decorators: [{ title: "Strong", value: "strong" }],
           },
         },
       ],
@@ -252,7 +252,7 @@ export default defineType({
           styles: [{ title: "Normal", value: "normal" }],
           lists: [],
           marks: {
-            decorators: [{ title: "Emphasis", value: "em" }],
+            decorators: [{ title: "Strong", value: "strong" }],
           },
         },
       ],
