@@ -167,6 +167,11 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
                   <h3>{person?.rolle}</h3>
                   <h1>{person?.name}</h1>
                   <PortableText value={person?.textKurz} />
+                  <div className="singlePersonLink">
+                    <Link href={`/personen?person=${person?.slug.current}`} scroll={false}>
+                      <h2>Mehr infos →</h2>
+                    </Link>
+                  </div>
                 </div>
               </div>
               <div className="singlePersonImg">
@@ -190,7 +195,7 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
             (entry, i) =>
               i <= 2 && (
                 <div key={i}>
-                  <AngebotRow angebot={entry} locale={locale} />
+                  <AngebotRow angebot={entry} locale={locale} fromSingle={true}/>
                 </div>
               )
           )}

@@ -2,15 +2,16 @@ import { getPersonen, getPrefooter } from "../../../../sanity/sanity-utils";
 import Person from "../../../../components/Personen/Person";
 import Prefooter from "../../../../components/Prefooter/Prefooter";
 
-export default async function page() {
+export default async function page({ searchParams }) {
   const personen = await getPersonen();
   const prefooter = await getPrefooter();
+
   return (
     <main>
       <div className="personenWrapper">
         {personen.map((person, i) => (
           <div className="person" key={i}>
-            <Person person={person} />
+            <Person person={person} scroll={searchParams.person} />
           </div>
         ))}
       </div>

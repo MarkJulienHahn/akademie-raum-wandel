@@ -1114,7 +1114,10 @@ p + p {
   letter-spacing: var(--letterSpacing-L);
   padding: 7px var(--space-M);
   border-radius: 50px;
-  border: 3px solid;
+}
+
+.singleBodyButton .button:hover {
+  border: 3px solid var(--dark);
 }
 
 .singleBodyPrice {
@@ -1158,6 +1161,16 @@ p + p {
   position: relative;
   background: white;
   width: 100%;
+}
+
+.singlePersonLink {
+  margin-top: var(--space-S);
+  text-align: center;
+  transition: opacity 0.2s ease;
+}
+
+.singlePersonLink:hover {
+  opacity: 0.3;
 }
 
 .singlePerson {

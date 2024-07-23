@@ -27,7 +27,7 @@ const numbersDE = {
   20: "Zwanzig Termine",
 };
 
-const AngebotRow = ({ angebot }) => {
+const AngebotRow = ({ angebot, fromSingle }) => {
   const formatPriceInEuro = (value) =>
     `${value.toFixed(2).replace(".", ",")} €`;
 
@@ -55,7 +55,13 @@ const AngebotRow = ({ angebot }) => {
         )}
       </div>
       <div className="discRow">
-        <Link href={`angebote/${angebot?.slug?.current}`}>
+        <Link
+          href={
+            !fromSingle
+              ? `angebote/${angebot?.slug?.current}`
+              : angebot?.slug?.current
+          }
+        >
           <h1 className="rowHeadline">{angebot?.title}</h1>
           <h1 className="rowHeadline rowHeadlineBottom">{angebot?.subtitle}</h1>
         </Link>

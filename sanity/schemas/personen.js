@@ -100,6 +100,7 @@ export default defineType({
       options: {
         source: "name",
       },
+      validation: (Rule) => Rule.required(),
     },
     orderRankField({ type: "angebote" }),
   ],
