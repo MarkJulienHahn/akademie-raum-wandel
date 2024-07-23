@@ -18,7 +18,6 @@ const Person = ({ person, scroll }) => {
       }
     }, 500);
 
-    // Cleanup the timer if the component unmounts or dependencies change
     return () => clearTimeout(timer);
   }, [scroll, person?.slug?.current]);
 
@@ -30,11 +29,15 @@ const Person = ({ person, scroll }) => {
           src={person.portrait.asset.url}
           alt={person.name || "Person portrait"}
           fill
+          loading="lazy"
+          sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
           style={{
             objectFit: "cover",
             objectPosition: "center",
             borderRadius: "10px",
           }}
+          placeholder="blur"
+          blurDataURL={person.portrait.asset.metadata.lqip}
         />
       </div>
       <div className="personInfo">
