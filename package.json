@@ -19,6 +19,7 @@
     "next": "14.2.3",
     "next-intl": "^3.14.1",
     "next-sanity": "^9.3.7",
+    "node-cache": "^5.1.2",
     "react": "^18",
     "react-div-100vh": "^0.7.0",
     "react-dom": "^18",

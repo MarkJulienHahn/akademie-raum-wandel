@@ -26,8 +26,9 @@ const FeedSection = ({ entry, i }) => {
         <h1>{entry.thema}</h1>
         <Image
           src={entry.background?.asset.url}
-          fill
+          layout="fill"
           style={{ objectFit: "cover" }}
+          sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
     </div>

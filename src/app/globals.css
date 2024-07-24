@@ -689,7 +689,7 @@ p + p {
 }
 
 .rowHeadlineBottom {
-  margin-top: -17px;
+  margin-top: -19px;
 }
 
 .angebotRow {
@@ -1397,7 +1397,10 @@ p + p {
     letter-spacing: -0.7px;
     padding: 7px var(--space-M);
     border-radius: 50px;
-    border: 3px solid;
+    margin: 0 10px;
+  }
+  .disclaimer {
+    margin-bottom: var(--space-S);
   }
 }
 @media screen and (max-width: 1200px) {
@@ -1449,7 +1452,7 @@ p + p {
 
     --fontSize-L: 30px;
     --lineHeight-L: 33px;
-    --letterSpacing-L: 0px;
+    --letterSpacing-L: -0.5px;
 
     --fontSize-XL: 80px;
     --lineHeight-XL: 80px;
@@ -1633,6 +1636,7 @@ p + p {
     position: relative;
     width: 100vw;
     padding: 0 10px;
+    margin-bottom: 50px
   }
   .kammerRow {
     position: relative;
@@ -1769,8 +1773,9 @@ p + p {
     hyphens: auto;
     word-wrap: break-word;
     overflow-wrap: break-word;
-
-    width: 100vw;
+    width: 100%;
+    line-height: 30px;
+    padding-top: var(--space-S);
   }
   .homeAngeboteWrapperMobile .kachelWrapper {
     max-width: unset;
@@ -1780,6 +1785,10 @@ p + p {
   .buyHeadline p {
     margin-bottom: var(--space-M);
   }
+  .singleBodyPrice {
+    font-size: 50px;
+    line-height: 60px;
+}
 }
 
 @media screen and (max-width: 700px) {

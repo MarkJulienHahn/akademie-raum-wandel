@@ -141,10 +141,7 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
               </div>
               <div className="singleBodyButton">
                 {angebot?.kategorie == "Webinar" && (
-                  <Button
-                    value={"Jetzt kaufen"}
-                    internal={angebot?.aufzeichnungsLink}
-                  />
+                  <Button value={"Jetzt kaufen"} href={angebot?.buchungsLink} />
                 )}
 
                 {angebot?.kategorie !== "Webinar" && inTheFuture && (
@@ -168,7 +165,10 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
                   <h1>{person?.name}</h1>
                   <PortableText value={person?.textKurz} />
                   <div className="singlePersonLink">
-                    <Link href={`/personen?person=${person?.slug.current}`} scroll={false}>
+                    <Link
+                      href={`/personen?person=${person?.slug.current}`}
+                      scroll={false}
+                    >
                       <h2>Mehr infos →</h2>
                     </Link>
                   </div>
@@ -177,12 +177,11 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
               <div className="singlePersonImg">
                 <Image
                   src={person?.portrait?.url.url}
-                  fill
-                  style={{
-                    objectFit: "cover",
-                    objectPosition: "center",
-                    borderRadius: "15px",
-                  }}
+                  layout="fill"
+                  objectFit="cover"
+                  objectPosition="center"
+                  quality={75}
+                  style={{ borderRadius: "15px" }}
                 />
               </div>
             </div>
@@ -195,7 +194,11 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
             (entry, i) =>
               i <= 2 && (
                 <div key={i}>
-                  <AngebotRow angebot={entry} locale={locale} fromSingle={true}/>
+                  <AngebotRow
+                    angebot={entry}
+                    locale={locale}
+                    fromSingle={true}
+                  />
                 </div>
               )
           )}

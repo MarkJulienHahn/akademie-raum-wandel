@@ -1,4 +1,8 @@
 import { createClient, groq } from "next-sanity";
+import NodeCache from "node-cache";
+
+// Initialize cache with a TTL of 10 minutes
+const cache = new NodeCache({ stdTTL: 600 });
 
 const client = createClient({
   projectId: "pwwuuxcr",
@@ -8,20 +12,30 @@ const client = createClient({
 
 export default client;
 
+// Helper function to fetch data with caching
+const fetchWithCache = async (key, query) => {
+  if (cache.has(key)) {
+    return cache.get(key);
+  }
+
+  const data = await client.fetch(query);
+  cache.set(key, data);
+  return data;
+};
+
 export async function getHome() {
-  return client.fetch(
-    groq`*[_type == "home"]
+  const query = groq`*[_type == "home"]
     {..., 
       "about": about{"image": background{"url": asset->{url}}, ...},
       personen{..., portrait{"asset": asset->{...}, "caption": caption}}, 
       "angebote": angebote[]->{...,"blurImageUrl": coalesce(blurImage.asset->url, null),}, 
       header{..., "introSlider": introSlider[]{"asset": asset->{...}}}
-    }`
-  );
+    }`;
+  return fetchWithCache("home", query);
 }
 
 export async function getAkademie() {
-  return client.fetch(groq`*[_type == "akademie"]{...,
+  const query = groq`*[_type == "akademie"]{...,
     feed[]{...,
       headline,
       background{
@@ -40,12 +54,12 @@ export async function getAkademie() {
       headline
     }
   }
-  `);
+  `;
+  return fetchWithCache("akademie", query);
 }
 
 export async function getAngebote() {
-  return client.fetch(
-    groq`*[_type == "angebote"]| order(termine[0].date asc){
+  const query = groq`*[_type == "angebote"]| order(termine[0].date asc){
       ...,
       "personen": personen[]->{name, slug, ..., "portrait": portrait{..., "url": asset->{url}}},
       termine[] {
@@ -56,46 +70,44 @@ export async function getAngebote() {
       "blurImageUrl": coalesce(blurImage.asset->url, null),
       slug,
     }
-    `
-  );
+    `;
+  return fetchWithCache("angebote", query);
 }
 
 export async function getPersonen() {
-  return client.fetch(
-    groq`*[_type == "personen"]|order(orderRank){
+  const query = groq`*[_type == "personen"]|order(orderRank){
       ..., "portrait": portrait{..., "asset": asset->{...}}
       }
-    `
-  );
+    `;
+  return fetchWithCache("personen", query);
 }
 
 export async function getContact() {
-  return client.fetch(groq`*[_type == "contact"]{...}`);
+  const query = groq`*[_type == "contact"]{...}`;
+  return fetchWithCache("contact", query);
 }
 
 export async function getFAQ() {
-  return client.fetch(groq`*[_type == "faq"]{...}`);
+  const query = groq`*[_type == "faq"]{...}`;
+  return fetchWithCache("faq", query);
 }
 
 export async function getPrefooter() {
-  return client.fetch(
-    groq`*[_type == "prefooter"]{..., "dozierende": dozierende{..., "button": button{...,  "file": file.asset->{url}}},}`
-  );
+  const query = groq`*[_type == "prefooter"]{..., "dozierende": dozierende{..., "button": button{...,  "file": file.asset->{url}}},}`;
+  return fetchWithCache("prefooter", query);
 }
 
 export async function getFooter() {
-  return client.fetch(groq`*[_type == "footer"]{...}`);
+  const query = groq`*[_type == "footer"]{...}`;
+  return fetchWithCache("footer", query);
 }
 
 export async function getImprint() {
-  return client.fetch(
-    groq`*[_type == "imprint"]
-    {...}`
-  );
+  const query = groq`*[_type == "imprint"]{...}`;
+  return fetchWithCache("imprint", query);
 }
+
 export async function getPrivacy() {
-  return client.fetch(
-    groq`*[_type == "privacy"]
-    {...}`
-  );
+  const query = groq`*[_type == "privacy"]{...}`;
+  return fetchWithCache("privacy", query);
 }

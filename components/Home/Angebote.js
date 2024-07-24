@@ -54,7 +54,6 @@ const Angebote = ({ content, locale }) => {
           spaceBetween={1}
           slidesPerView={2}
           centeredSlides={true}
-          initialSlide={1}
           onSwiper={(swiper) => {
             swiperRefTablet.current = swiper;
           }}
@@ -77,7 +76,6 @@ const Angebote = ({ content, locale }) => {
           spaceBetween={1}
           slidesPerView={1.2}
           centeredSlides={true}
-          initialSlide={1}
           onSwiper={(swiper) => {
             swiperRefMobile.current = swiper;
           }}

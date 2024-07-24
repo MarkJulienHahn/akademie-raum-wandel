@@ -89,17 +89,21 @@ const AngebotRow = ({ angebot, fromSingle }) => {
             <div key={i}>{person.name}</div>
           ))}
         </div>
-        <div className="disclaimer disclaimerRow">
-          <p>
-            <span className="termine">
-              {numbersDE[angebot?.termine?.length]}
-            </span>
-            {angebot?.zoom && angebot.kategorie !== "Webinar" && " per Zoom"}
-            {angebot?.aufzeichnung &&
-              angebot.kategorie !== "Webinar" &&
-              " mit danach versendeter Aufzeichnung für zeitliche Flexibilität."}
-          </p>
-        </div>
+
+        {angebot.kategorie !== "Webinar" && (
+          <div className="disclaimer disclaimerRow">
+            <p>
+              <span className="termine">
+                {numbersDE[angebot?.termine?.length]}
+              </span>
+              {angebot?.zoom && angebot.kategorie !== "Webinar" && " per Zoom"}
+              {angebot?.aufzeichnung &&
+                angebot.kategorie !== "Webinar" &&
+                " mit danach versendeter Aufzeichnung für zeitliche Flexibilität."}
+            </p>
+          </div>
+        )}
+        
       </div>
 
       <div className="buttonRow">
