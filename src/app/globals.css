@@ -1364,6 +1364,44 @@ p + p {
   margin-bottom: var(--space-S);
 }
 
+/* WEBINAR */
+
+.webinar {
+  width: 100vw;
+  padding: var(--space-XL) var(--space-XL);
+}
+
+.webinar__video-container {
+  width: 100%;
+  position: relative;
+  padding-bottom: 56.25%; 
+  height: 0;
+}
+
+.webinar__video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.webinar__description {
+  padding-top: var(--space-M);
+}
+
+.webinar__description h1 {
+  padding-bottom: var(--space-S);
+}
+
+.webinar__description p {
+  max-width: 500px;
+}
+
+.webinar__personen {
+  margin-bottom: var(--space-M);
+}
+
 @media screen and (max-width: 1500px) {
   .imprintWrapper {
     width: 100%;
@@ -1636,7 +1674,7 @@ p + p {
     position: relative;
     width: 100vw;
     padding: 0 10px;
-    margin-bottom: 50px
+    margin-bottom: 50px;
   }
   .kammerRow {
     position: relative;
@@ -1788,7 +1826,10 @@ p + p {
   .singleBodyPrice {
     font-size: 50px;
     line-height: 60px;
-}
+  }
+  .webinar {
+    padding: var(--space-XL) var(--space-S);
+  }
 }
 
 @media screen and (max-width: 700px) {

@@ -2,7 +2,6 @@ import { Link } from "@/navigation";
 import { getFooter } from "../../sanity/sanity-utils";
 
 import FaqSection from "../FAQ/FaqSection";
-import { PortableText } from "next-sanity";
 import NewsletterSignup from "./NewsletterSignup";
 
 export default async function Footer() {

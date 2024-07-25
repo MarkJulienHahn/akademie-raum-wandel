@@ -47,6 +47,8 @@ const Header = ({ content }) => {
                 style={{ objectFit: "cover" }}
                 alt={`slide-${index}`}
                 quality={50}
+                placeholder="blur"
+                blurDataURL={slide.asset.metadata.lqip}
                 priority={index == 0 ? "true" : "false"}
                 sizes="(max-width: 600px) 100vw, (max-width: 1200px) 100vw, 100vw"
               />

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Link } from "@/navigation";
 import Question from "./Question";
 
 const FaqSection = ({ questions, sectionIndex }) => {
