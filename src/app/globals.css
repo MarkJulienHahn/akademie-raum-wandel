@@ -612,6 +612,7 @@ p + p {
 }
 
 .kachelWrapper h1 {
+  -webkit-hyphens: auto;
   hyphens: auto;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -626,7 +627,11 @@ p + p {
 }
 
 .kachelDescr {
-  padding-top: var(--space-M);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    text-overflow: ellipsis;
 }
 
 .angebotButtonWrapper {
@@ -733,6 +738,7 @@ p + p {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding-top: var(--space-S);
 }
 
 .datesRow {
@@ -1417,7 +1423,7 @@ p + p {
     height: 35%;
   }
   .kachelDescr {
-    margin-bottom: var(--space-S);
+    -webkit-line-clamp: 8;
   }
   .angebotButtonWrapper {
     margin: var(--space-S);

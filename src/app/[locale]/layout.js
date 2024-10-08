@@ -25,7 +25,7 @@ export async function generateMetadata() {
 
 export default async function LocaleLayout({ children, params: { locale } }) {
   return (
-    <html lang={locale}>
+    <html lang="de">
       <Head>
         <link
           rel="apple-touch-icon"
