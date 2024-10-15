@@ -53,7 +53,7 @@ const AngebotKachel = ({ angebot, locale }) => {
 
   const today = new Date();
   const latestDate = getLatestDate(angebot.termine);
-  const inTheFuture = latestDate > today;
+  const inTheFuture = latestDate >= today;
 
   useEffect(() => {
     if (angebot.hintergrund == "dark") setStyle(dark);
@@ -61,6 +61,8 @@ const AngebotKachel = ({ angebot, locale }) => {
     if (angebot.hintergrund == "blurDark") setStyle(blurDark);
     if (angebot.hintergrund == "blurLight") setStyle(blurLight);
   }, []);
+
+
 
   return inTheFuture | (angebot.kategorie == "Webinar") ? (
     <div style={style} className="kachelWrapper">

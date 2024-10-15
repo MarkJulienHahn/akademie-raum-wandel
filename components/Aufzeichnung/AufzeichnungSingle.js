@@ -26,7 +26,7 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
 
   const today = new Date();
   const latestDate = getLatestDate(angebot.termine);
-  const inTheFuture = latestDate > today;
+  const inTheFuture = latestDate >= today;
 
   const dark = { background: "var(--dark)", color: "var(--light)" };
   const hell = { background: "var(--light)", color: "var(--dark)" };

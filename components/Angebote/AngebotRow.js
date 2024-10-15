@@ -40,7 +40,7 @@ const AngebotRow = ({ angebot, fromSingle }) => {
 
   const today = new Date();
   const latestDate = getLatestDate(angebot.termine);
-  const inTheFuture = latestDate > today;
+  const inTheFuture = latestDate >= today;
 
   return inTheFuture | (angebot.kategorie == "Webinar") ? (
     <div className="angebotRow">

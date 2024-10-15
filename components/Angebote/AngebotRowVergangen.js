@@ -39,7 +39,7 @@ const AngebotRow = ({ angebot }) => {
 
   const today = new Date();
   const latestDate = getLatestDate(angebot.termine);
-  const inTheFuture = latestDate > today;
+  const inTheFuture = latestDate >= today;
 
   return (
     !inTheFuture &&

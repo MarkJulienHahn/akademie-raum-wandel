@@ -53,7 +53,7 @@ const AngebotKachelVergangen = ({ angebot, locale }) => {
 
   const today = new Date();
   const latestDate = getLatestDate(angebot.termine);
-  const inTheFuture = latestDate > today;
+  const inTheFuture = latestDate >= today;
 
   useEffect(() => {
     if (angebot.hintergrund == "dark") setStyle(dark);

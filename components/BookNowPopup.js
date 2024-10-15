@@ -58,7 +58,7 @@ const BookNowPopup = ({
     );
   const today = new Date();
   const latestDate = getLatestDate(termine);
-  const inTheFuture = latestDate > today;
+  const inTheFuture = latestDate >= today;
 
   useEffect(() => {
     return () => {
