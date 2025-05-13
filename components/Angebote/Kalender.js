@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import AngebotRow from "./AngebotRow";
+import AngebotRowWebinar from "./AngebotRowWebinar";
 import AngebotRowVergangen from "./AngebotRowVergangen";
 import Filter from "./Filter";
 
@@ -50,7 +51,7 @@ const Kalender = ({ angebote, personen }) => {
     checkVergangeneExist();
   }, [angeboteFiltered]);
 
-  console.log(ref?.current?.clientHeight, vergangeneExist);
+  console.log("angebote:", angebote, "filtered:", angeboteFiltered);
 
   return (
     <div>
@@ -63,6 +64,12 @@ const Kalender = ({ angebote, personen }) => {
       {angeboteFiltered.map((angebot, i) => (
         <div key={i}>
           <AngebotRow angebot={angebot} />
+        </div>
+      ))}
+
+      {angeboteFiltered.map((angebot, i) => (
+        <div key={i}>
+          <AngebotRowWebinar angebot={angebot} />
         </div>
       ))}
 

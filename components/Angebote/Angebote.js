@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 
 import AngebotKachel from "./AngebotKachel";
+import AngebotKachelWebinar from "./AngebotKachelWebinar";
 import AngebotKachelVergangen from "./AngebotKachelVergangen";
 import Filter from "./Filter";
 
@@ -60,6 +61,11 @@ const Angebote = ({ angebote, personen }) => {
         {angeboteFiltered.map((angebot, i) => (
           <div key={i}>
             <AngebotKachel angebot={angebot} />
+          </div>
+        ))}
+        {angeboteFiltered.map((angebot, i) => (
+          <div key={i}>
+            <AngebotKachelWebinar angebot={angebot} />
           </div>
         ))}
 

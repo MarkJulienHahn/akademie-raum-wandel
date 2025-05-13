@@ -28,27 +28,7 @@ const numbersDE = {
 };
 
 const AngebotRow = ({ angebot, fromSingle }) => {
-  const formatPriceInEuro = (value) =>
-    `${value.toFixed(2).replace(".", ",")} €`;
-
-  const getFirstFutureDateTime = (termine) => {
-    if (!Array.isArray(termine)) return null;
-  
-    const now = new Date();
-  
-    return termine.find((termin) => {
-      const dateTimeString = `${termin.date}T${termin.start}:00`;
-      const dateTime = new Date(dateTimeString);
-      return dateTime >= now;
-    });
-  };
-  
-  const inTheFuture = !!getFirstFutureDateTime(angebot.termine);
-  
-
-  console.log(angebot);
-
-  return inTheFuture ? (
+  return angebot.kategorie == "Webinar" ? (
     <div className="angebotRow">
       <div className="katRow">
         <p>{angebot?.kategorie}</p>

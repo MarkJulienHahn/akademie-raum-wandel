@@ -44,21 +44,6 @@ const AngebotKachel = ({ angebot, locale }) => {
 
   const [style, setStyle] = useState(dark);
 
-  const getFirstFutureDateTime = (termine) => {
-    if (!Array.isArray(termine)) return null;
-  
-    const now = new Date();
-  
-    return termine.find((termin) => {
-      const dateTimeString = `${termin.date}T${termin.start}:00`;
-      const dateTime = new Date(dateTimeString);
-      return dateTime >= now;
-    });
-  };
-  
-  const inTheFuture = !!getFirstFutureDateTime(angebot.termine);
-  
-
   useEffect(() => {
     if (angebot.hintergrund == "dark") setStyle(dark);
     if (angebot.hintergrund == "hell") setStyle(hell);
@@ -66,7 +51,8 @@ const AngebotKachel = ({ angebot, locale }) => {
     if (angebot.hintergrund == "blurLight") setStyle(blurLight);
   }, []);
 
-  return inTheFuture ? (
+
+  return (angebot.kategorie == "Webinar") ? (
     <div style={style} className="kachelWrapper">
       <div className="kachelHeadline">
         <h2>{angebot?.kategorie}</h2>

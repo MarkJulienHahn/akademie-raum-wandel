@@ -30,16 +30,20 @@ const AngebotRow = ({ angebot }) => {
   const formatPriceInEuro = (value) =>
     `${value.toFixed(2).replace(".", ",")} €`;
 
-  const getLatestDate = (termine) =>
-    termine?.reduce(
-      (latest, termin) =>
-        new Date(termin.date) > latest ? new Date(termin.date) : latest,
-      new Date(termine[0].date)
-    );
-
-  const today = new Date();
-  const latestDate = getLatestDate(angebot.termine);
-  const inTheFuture = latestDate >= today;
+  const getFirstFutureDateTime = (termine) => {
+    if (!Array.isArray(termine)) return null;
+  
+    const now = new Date();
+  
+    return termine.find((termin) => {
+      const dateTimeString = `${termin.date}T${termin.start}:00`;
+      const dateTime = new Date(dateTimeString);
+      return dateTime >= now;
+    });
+  };
+  
+  const inTheFuture = !!getFirstFutureDateTime(angebot.termine);
+  
 
   return (
     !inTheFuture &&
