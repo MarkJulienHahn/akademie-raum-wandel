@@ -7,10 +7,21 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
 const Angebote = ({ content, locale }) => {
-  const today = new Date();
+
+  const getFirstFutureDateTime = (termine) => {
+    if (!Array.isArray(termine)) return null;
+
+    const now = new Date();
+
+    return termine.find((termin) => {
+      const dateTimeString = `${termin.date}T${termin.start}:00`;
+      const dateTime = new Date(dateTimeString);
+      return dateTime >= now;
+    });
+  };
 
   const futureContent = content.filter((entry) =>
-    entry.termine?.some((termin) => new Date(termin.date) > today)
+    getFirstFutureDateTime(entry.termine)
   );
 
   const swiperRefDesktop = useRef(null);
