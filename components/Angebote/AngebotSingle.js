@@ -58,16 +58,30 @@ const AngebotSingle = ({ angebot, angebote, slug, locale }) => {
   const [style, setStyle] = useState(dark);
   const key = usePathname();
 
-  const getLatestDate = (termine) =>
-    termine &&
-    termine.reduce(
-      (latest, termin) =>
-        new Date(termin.date) > latest ? new Date(termin.date) : latest,
-      new Date(termine[0].date)
-    );
-  const today = new Date();
-  const latestDate = getLatestDate(angebot.termine);
-  const inTheFuture = latestDate >= today;
+  // const getLatestDate = (termine) =>
+  //   termine &&
+  //   termine.reduce(
+  //     (latest, termin) =>
+  //       new Date(termin.date) > latest ? new Date(termin.date) : latest,
+  //     new Date(termine[0].date)
+  //   );
+
+  const getFirstFutureDateTime = (termine) => {
+    if (!Array.isArray(termine)) return null;
+
+    const now = new Date();
+
+    return termine.find((termin) => {
+      const dateTimeString = `${termin.date}T${termin.start}:00`;
+      const dateTime = new Date(dateTimeString);
+      return dateTime >= now;
+    });
+  };
+
+  // const today = new Date();
+  // const latestDate = getLatestDate(angebot.termine);
+
+    const inTheFuture = !!getFirstFutureDateTime(angebot.termine);
 
   useEffect(() => {
     if (angebot.hintergrund == "dark") setStyle(dark);
